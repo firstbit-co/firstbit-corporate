@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ノート | 株式会社Firstbit</title>
+  <meta name="description" content="株式会社Firstbitが公開しているノートの一覧です。">
+  <link rel="canonical" href="https://firstbit-co.github.io/firstbit-corporate/notes/index.html">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:site_name" content="株式会社Firstbit">
+  <meta property="og:title" content="ノート">
+  <meta property="og:description" content="株式会社Firstbitが公開しているノートの一覧です。">
+  <meta property="og:url" content="https://firstbit-co.github.io/firstbit-corporate/notes/index.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['"Noto Sans JP"', 'system-ui', 'sans-serif'] },
+          colors: {
+            navy: { 950: '#0a0f1a', 900: '#0f172a', 800: '#1e293b', 700: '#334155' },
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    body { font-family: 'Noto Sans JP', system-ui, sans-serif; line-height: 1.65; }
+
+    /* ノート本文（Markdown から生成される部分）のタイポグラフィ */
+    .note-body { font-size: 0.9375rem; font-weight: 300; line-height: 1.9; color: #475569; }
+    .note-body > * + * { margin-top: 1.25rem; }
+    .note-body h2 { margin-top: 2.75rem; font-size: 1.25rem; font-weight: 500; letter-spacing: -0.01em; color: #0f172a; }
+    .note-body h3 { margin-top: 2rem; font-size: 1.0625rem; font-weight: 500; color: #0f172a; }
+    .note-body h4 { margin-top: 1.75rem; font-size: 1rem; font-weight: 500; color: #0f172a; }
+    .note-body a { color: #1e293b; text-decoration: underline; text-decoration-color: #cbd5e1; text-underline-offset: 4px; }
+    .note-body a:hover { text-decoration-color: #64748b; }
+    .note-body strong { font-weight: 600; color: #1e293b; }
+    .note-body ul, .note-body ol { padding-left: 1.5rem; }
+    .note-body ul { list-style: disc; }
+    .note-body ol { list-style: decimal; }
+    .note-body li + li { margin-top: 0.5rem; }
+    .note-body blockquote { border-left: 2px solid #cbd5e1; padding: 0.25rem 0 0.25rem 1.25rem; color: #334155; font-style: normal; }
+    .note-body code { background: #f1f5f9; border-radius: 0.25rem; padding: 0.125rem 0.375rem; font-size: 0.8125rem; color: #0f172a; }
+    .note-body pre { overflow-x: auto; border-radius: 0.5rem; background: #0f172a; padding: 1rem 1.25rem; }
+    .note-body pre code { background: transparent; padding: 0; color: #e2e8f0; font-size: 0.8125rem; line-height: 1.7; }
+    .note-body hr { border: 0; border-top: 1px solid #e2e8f0; margin: 2.5rem 0; }
+    .note-body img { max-width: 100%; height: auto; border-radius: 0.5rem; }
+    .note-body table { width: 100%; border-collapse: collapse; font-size: 0.875rem; display: block; overflow-x: auto; }
+    .note-body th, .note-body td { border: 1px solid #e2e8f0; padding: 0.625rem 0.875rem; text-align: left; vertical-align: top; }
+    .note-body th { background: #f8fafc; font-weight: 500; color: #0f172a; white-space: nowrap; }
+  </style>
+</head>
+<body class="bg-white text-slate-800 antialiased">
+
+  <header class="bg-navy-950">
+    <div class="mx-auto flex max-w-4xl items-center justify-between px-6 py-3.5 lg:px-8">
+      <a href="../index.html" class="group flex flex-col leading-tight">
+        <span class="text-lg font-semibold tracking-[0.12em] text-white transition group-hover:text-slate-200">Firstbit</span>
+        <span class="text-[10px] font-light tracking-widest text-slate-400">株式会社Firstbit</span>
+      </a>
+      <nav class="flex items-center gap-6" aria-label="ノートナビゲーション">
+        <a href="./index.html" class="text-xs font-medium tracking-[0.15em] text-slate-300 transition hover:text-white">NOTES</a>
+        <a href="../index.html" class="text-xs font-medium tracking-[0.15em] text-slate-300 transition hover:text-white">HOME</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="bg-white py-14 md:py-20">
+    <div class="mx-auto max-w-3xl px-6 lg:px-8">
+      <p class="text-xs font-medium tracking-[0.15em] text-slate-500">NOTES</p>
+      <h1 class="mt-3 text-2xl font-medium tracking-tight text-navy-900 md:text-3xl">ノート</h1>
+      <p class="mt-4 text-sm font-light leading-relaxed text-slate-600">株式会社Firstbitが公開しているノートの一覧です。</p>
+      <p class="prose-body text-sm font-light text-slate-500">公開中のノートはまだありません。</p>
+    </div>
+  </main>
+
+
+  <footer class="bg-navy-950 py-10">
+    <div class="mx-auto max-w-4xl px-6 lg:px-8">
+      <p class="text-base font-semibold tracking-[0.12em] text-white">Firstbit</p>
+      <p class="mt-0.5 text-[10px] tracking-widest text-slate-500">株式会社Firstbit</p>
+      <p class="mt-3">
+        <a href="mailto:info@hiroshima-ifa.com" class="text-xs text-slate-400 transition hover:text-white">info@hiroshima-ifa.com</a>
+      </p>
+      <div class="mt-8 border-t border-white/10 pt-6">
+        <p class="text-[11px] font-light tracking-wider text-slate-600">&copy; 2026 Firstbit Co., Ltd. ALL RIGHTS RESERVED.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
