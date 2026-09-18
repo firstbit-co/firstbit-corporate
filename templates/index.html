@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<!--
+  このファイルは自動生成されています。直接編集しないでください。
+  文章・住所・社名などの内容は vault/10-company/ のノート、レイアウトは
+  templates/index.html を編集し、npm run build を実行してください。
+-->
+<html lang="ja" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{meta.page_title}}</title>
+  <meta name="description" content="{{meta.description}}">
+  <meta name="keywords" content="{{meta.keywords}}">
+  <meta name="author" content="{{company.name}}">
+  <link rel="canonical" href="{{meta.url}}">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:site_name" content="{{company.name}}">
+  <meta property="og:title" content="{{meta.og_title}}">
+  <meta property="og:description" content="{{meta.og_description}}">
+  <meta property="og:url" content="{{meta.url}}">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{meta.twitter_title}}">
+  <meta name="twitter:description" content="{{meta.twitter_description}}">
+  <script type="application/ld+json">
+  <!--@jsonld-->  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Noto Sans JP"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            navy: {
+              950: '#0a0f1a',
+              900: '#0f172a',
+              800: '#1e293b',
+              700: '#334155',
+            },
+            slate: {
+              850: '#1a2332',
+            },
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    body { font-family: 'Noto Sans JP', system-ui, sans-serif; line-height: 1.65; }
+
+    .prose-body { font-size: 0.875rem; font-weight: 300; line-height: 1.65; color: #475569; }
+    @media (min-width: 768px) { .prose-body { font-size: 0.9375rem; } }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .fade-in.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.2s; }
+    .fade-in-delay-3 { transition-delay: 0.3s; }
+    .fade-in-delay-4 { transition-delay: 0.4s; }
+
+    .hero-gradient {
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 50% at 20% 80%, rgba(148, 163, 184, 0.08) 0%, transparent 50%),
+        linear-gradient(160deg, #0a0f1a 0%, #0f172a 45%, #1e293b 100%);
+    }
+
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .service-card {
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    }
+
+    .scroll-indicator {
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
+
+    .header-scrolled {
+      background: rgba(10, 15, 26, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+  </style>
+</head>
+<body class="bg-white text-slate-800 antialiased">
+
+  <!-- Header -->
+  <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5 lg:px-8">
+      <a href="#top" class="group flex flex-col leading-tight">
+        <span class="text-lg font-semibold tracking-[0.12em] text-white transition group-hover:text-slate-200">{{company.brand}}</span>
+        <span class="text-[10px] font-light tracking-widest text-slate-400">{{company.name}}</span>
+      </a>
+      <nav class="hidden items-center gap-8 lg:flex" aria-label="メインナビゲーション">
+        <a href="#origin" class="text-xs font-medium tracking-[0.15em] text-slate-300 transition hover:text-white">ABOUT</a>
+        <a href="#philosophy" class="text-xs font-medium tracking-[0.15em] text-slate-300 transition hover:text-white">PHILOSOPHY</a>
+        <a href="#services" class="text-xs font-medium tracking-[0.15em] text-slate-300 transition hover:text-white">SERVICES</a>
+        <a href="#message" class="text-xs font-medium tracking-[0.15em] text-slate-300 transition hover:text-white">MESSAGE</a>
+        <a href="#company" class="text-xs font-medium tracking-[0.15em] text-slate-300 transition hover:text-white">COMPANY</a>
+        <a href="#contact" class="text-xs font-medium tracking-[0.15em] text-slate-300 transition hover:text-white">CONTACT</a>
+      </nav>
+      <button id="menu-toggle" class="flex flex-col gap-1.5 md:hidden" aria-label="メニューを開く" aria-expanded="false">
+        <span class="block h-px w-6 bg-white transition"></span>
+        <span class="block h-px w-6 bg-white transition"></span>
+        <span class="block h-px w-4 bg-white transition"></span>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden border-t border-white/10 bg-navy-950/95 backdrop-blur-md md:hidden">
+      <nav class="flex flex-col px-6 py-4" aria-label="モバイルナビゲーション">
+        <a href="#origin" class="mobile-link border-b border-white/5 py-4 text-sm tracking-[0.15em] text-slate-300">ABOUT</a>
+        <a href="#philosophy" class="mobile-link border-b border-white/5 py-4 text-sm tracking-[0.15em] text-slate-300">PHILOSOPHY</a>
+        <a href="#services" class="mobile-link border-b border-white/5 py-4 text-sm tracking-[0.15em] text-slate-300">SERVICES</a>
+        <a href="#message" class="mobile-link border-b border-white/5 py-4 text-sm tracking-[0.15em] text-slate-300">MESSAGE</a>
+        <a href="#company" class="mobile-link border-b border-white/5 py-4 text-sm tracking-[0.15em] text-slate-300">COMPANY</a>
+        <a href="#contact" class="mobile-link py-4 text-sm tracking-[0.15em] text-slate-300">CONTACT</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- Hero -->
+    <section class="hero-gradient relative flex min-h-screen items-center overflow-hidden">
+      <div class="hero-grid absolute inset-0 pointer-events-none"></div>
+      <div class="absolute -right-32 top-1/4 h-96 w-96 rounded-full bg-blue-500/5 blur-3xl"></div>
+      <div class="absolute -left-24 bottom-1/4 h-80 w-80 rounded-full bg-slate-400/5 blur-3xl"></div>
+
+      <div class="relative mx-auto max-w-6xl px-6 py-20 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="fade-in mb-4 text-xs font-medium tracking-[0.35em] text-slate-400 uppercase">{{hero.eyebrow}}</p>
+          <h1 class="fade-in fade-in-delay-1 text-3xl font-light leading-snug tracking-wide text-white sm:text-4xl md:text-5xl">
+            <span class="block text-lg font-medium tracking-wide text-slate-300 sm:text-xl">{{hero.lede}}</span>
+            {{hero.headline}}
+          </h1>
+          <p class="fade-in fade-in-delay-2 mt-5 max-w-2xl text-sm font-light leading-relaxed text-slate-400 sm:text-base">
+            {{hero.lead}}
+          </p>
+        </div>
+
+        <a href="#origin" class="fade-in fade-in-delay-3 mt-10 inline-flex flex-col items-center gap-2 text-slate-400 transition hover:text-white group">
+          <span class="text-[11px] font-medium tracking-[0.25em]">SCROLL</span>
+          <span class="scroll-indicator flex h-10 w-10 items-center justify-center rounded-full border border-white/20 transition group-hover:border-white/40">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 社名に込めた想い -->
+    <section id="origin" class="bg-white py-16 md:py-20">
+      <div class="mx-auto max-w-6xl px-6 lg:px-8">
+        <div class="fade-in mb-8 max-w-3xl">
+          <p class="mb-2 text-xs font-medium tracking-[0.3em] text-slate-400">ABOUT</p>
+          <h2 class="text-2xl font-medium tracking-tight text-navy-900 md:text-3xl">社名に込めた想い</h2>
+        </div>
+        <div class="fade-in max-w-4xl prose-body space-y-3">
+          <!--@origin-->        </div>
+      </div>
+    </section>
+
+    <!-- 理念・ビジョン -->
+    <section id="philosophy" class="bg-slate-50 py-16 md:py-20">
+      <div class="mx-auto max-w-6xl px-6 lg:px-8">
+        <div class="fade-in mb-10 max-w-3xl">
+          <p class="mb-2 text-xs font-medium tracking-[0.3em] text-slate-400">PHILOSOPHY &amp; VISION</p>
+          <h2 class="text-2xl font-medium tracking-tight text-navy-900 md:text-3xl">理念・ビジョン</h2>
+        </div>
+
+        <div class="fade-in mb-10 max-w-4xl border-b border-slate-200 pb-10">
+          <p class="mb-1 text-xs font-medium tracking-[0.2em] text-slate-400">Philosophy</p>
+          <h3 class="mb-1 text-lg font-medium tracking-tight text-navy-900">理念</h3>
+          <p class="mb-4 text-base font-medium leading-snug text-navy-900 md:text-lg">
+            {{philosophy.statement}}
+          </p>
+          <div class="prose-body space-y-3">
+            <!--@philosophy-body-->          </div>
+        </div>
+
+        <div class="fade-in mb-10 max-w-4xl border-b border-slate-200 pb-10">
+          <p class="mb-1 text-xs font-medium tracking-[0.2em] text-slate-400">Vision</p>
+          <h3 class="mb-1 text-lg font-medium tracking-tight text-navy-900">ビジョン</h3>
+          <p class="mb-4 text-base font-medium leading-snug text-navy-900 md:text-lg">
+            {{vision.statement}}
+          </p>
+          <div class="prose-body space-y-3">
+            <!--@vision-body-->          </div>
+        </div>
+
+        <div class="fade-in">
+          <h3 class="mb-6 text-lg font-medium tracking-tight text-navy-900">大切にしている価値観</h3>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <!--@values-->          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="bg-navy-950 py-16 md:py-20">
+      <div class="mx-auto max-w-6xl px-6 lg:px-8">
+        <div class="fade-in mb-10 max-w-4xl">
+          <p class="mb-2 text-xs font-medium tracking-[0.3em] text-slate-500">SERVICES</p>
+          <h2 class="text-2xl font-medium tracking-tight text-white md:text-3xl">事業内容</h2>
+          <p class="mt-1 text-xs font-light tracking-[0.15em] text-slate-500">Our Business</p>
+          <p class="mt-4 text-sm font-light leading-relaxed text-slate-400">
+            {{services.intro}}
+          </p>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-2">
+          <!--@services-->        </div>
+      </div>
+    </section>
+
+    <!-- 代表者挨拶 -->
+    <section id="message" class="bg-slate-50 py-16 md:py-20">
+      <div class="mx-auto max-w-6xl px-6 lg:px-8">
+        <div class="fade-in mb-8 max-w-3xl">
+          <p class="mb-2 text-xs font-medium tracking-[0.3em] text-slate-400">MESSAGE</p>
+          <h2 class="text-2xl font-medium tracking-tight text-navy-900 md:text-3xl">代表者挨拶</h2>
+        </div>
+
+        <div class="fade-in max-w-4xl">
+          <div class="prose-body space-y-3">
+            <!--@message-->          </div>
+          <p class="mt-8 text-right text-sm font-medium text-navy-900">
+            {{message.signature_role}}<span class="ml-4 text-base">{{message.signature_name}}</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 会社概要 -->
+    <section id="company" class="bg-white py-16 md:py-20">
+      <div class="mx-auto max-w-6xl px-6 lg:px-8">
+        <div class="fade-in mb-10">
+          <p class="mb-2 text-xs font-medium tracking-[0.3em] text-slate-400">COMPANY</p>
+          <h2 class="text-2xl font-medium tracking-tight text-navy-900 md:text-3xl">会社概要</h2>
+        </div>
+
+        <div class="fade-in overflow-hidden rounded-sm border border-slate-200 bg-white">
+            <table class="w-full text-sm">
+              <tbody>
+                <!--@company-table-->              </tbody>
+            </table>
+        </div>
+
+        <div class="fade-in mt-8">
+          <p class="mb-4 text-xs font-medium tracking-[0.2em] text-slate-400">OFFICE LOCATIONS</p>
+          <div class="grid gap-5 lg:grid-cols-3">
+            <!--@offices-->          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- お問い合わせ -->
+    <section id="contact" class="bg-navy-950 py-16 md:py-20">
+      <div class="mx-auto max-w-6xl px-6 lg:px-8">
+        <div class="fade-in mx-auto max-w-2xl text-center">
+          <p class="mb-2 text-xs font-medium tracking-[0.3em] text-slate-500">CONTACT</p>
+          <h2 class="text-2xl font-medium tracking-tight text-white md:text-3xl">お問い合わせ</h2>
+          <p class="mt-4 text-sm font-light leading-relaxed text-slate-400">
+            {{meta.contact_lead}}
+          </p>
+          <div class="mt-8">
+            <a
+              href="mailto:{{company.email}}"
+              class="inline-flex items-center gap-3 rounded-sm border border-white/20 bg-white/5 px-8 py-4 text-sm font-medium tracking-wide text-white transition hover:border-white/40 hover:bg-white/10"
+            >
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              {{company.email}}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-navy-950 py-10">
+    <div class="mx-auto max-w-6xl px-6 lg:px-8">
+      <div class="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+        <div>
+          <p class="text-base font-semibold tracking-[0.12em] text-white">{{company.brand}}</p>
+          <p class="mt-0.5 text-[10px] tracking-widest text-slate-500">{{company.footer_names}}</p>
+          <p class="mt-3">
+            <a href="mailto:{{company.email}}" class="text-xs text-slate-400 transition hover:text-white">{{company.email}}</a>
+          </p>
+          <p class="mt-3 space-y-1.5 text-[11px] leading-normal text-slate-500">
+            <!--@footer-offices-->          </p>
+        </div>
+        <nav class="flex flex-wrap gap-x-8 gap-y-3" aria-label="フッターナビゲーション">
+          <a href="#origin" class="text-xs tracking-[0.15em] text-slate-400 transition hover:text-white">ABOUT</a>
+          <a href="#philosophy" class="text-xs tracking-[0.15em] text-slate-400 transition hover:text-white">PHILOSOPHY</a>
+          <a href="#services" class="text-xs tracking-[0.15em] text-slate-400 transition hover:text-white">SERVICES</a>
+          <a href="#message" class="text-xs tracking-[0.15em] text-slate-400 transition hover:text-white">MESSAGE</a>
+          <a href="#company" class="text-xs tracking-[0.15em] text-slate-400 transition hover:text-white">COMPANY</a>
+          <a href="#contact" class="text-xs tracking-[0.15em] text-slate-400 transition hover:text-white">CONTACT</a>
+        </nav>
+      </div>
+      <div class="mt-8 border-t border-white/10 pt-6">
+        <p class="text-[11px] font-light tracking-wider text-slate-600">{{meta.copyright}}</p>
+        <p class="mt-3">
+          <a href="{{meta.pdf_href}}" target="_blank" rel="noopener noreferrer" class="text-[11px] tracking-wide text-slate-400 underline decoration-white/20 underline-offset-4 transition hover:text-white hover:decoration-white/50">{{meta.pdf_label}}</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const header = document.getElementById('header');
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileLinks = document.querySelectorAll('.mobile-link');
+
+      function updateHeader() {
+        if (window.scrollY > 40) {
+          header.classList.add('header-scrolled');
+        } else {
+          header.classList.remove('header-scrolled');
+        }
+      }
+
+      window.addEventListener('scroll', updateHeader, { passive: true });
+      updateHeader();
+
+      menuToggle.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.toggle('hidden') === false;
+        menuToggle.setAttribute('aria-expanded', isOpen);
+      });
+
+      mobileLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      const fadeElements = document.querySelectorAll('.fade-in');
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      fadeElements.forEach((el) => observer.observe(el));
+
+      fadeElements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.85) {
+          el.classList.add('is-visible');
+          observer.unobserve(el);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

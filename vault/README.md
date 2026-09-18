@@ -1,6 +1,7 @@
 ---
 title: vault の使い方
 tags: [meta]
+updated: 2026-09-18
 publish: false
 ---
 
@@ -44,14 +45,42 @@ publish: false
 | `publish` | `true` にしたノートだけがサイト（`/notes/`）に公開されます |
 | `slug` | 公開URLのファイル名。日本語タイトルのノートを公開するときは指定推奨 |
 
+## サイト本文のノート
+
+`10-company/` にある frontmatter に `site:` が付いたノートは、**トップページ
+（`index.html`）の中身そのもの**。ここを直して push すると、サイトの文言が変わる。
+
+| ノート | サイトの場所 | 書く場所 |
+| --- | --- | --- |
+| サイト設定 | `<head>`（タイトル・説明・OGP）、お問い合わせ文、フッター | frontmatter |
+| 会社概要 | 会社概要テーブル、OFFICE LOCATIONS、フッター住所、構造化データ | frontmatter |
+| ヒーロー | ファーストビュー（H1・リード文） | frontmatter と `## 本文` |
+| 社名に込めた想い | ABOUT | `## 本文` |
+| 理念・ビジョン | PHILOSOPHY & VISION | `## 理念` `## ビジョン` の段落と `## 大切にしている価値観` の表 |
+| 事業内容 | SERVICES | `## 概要` と `## 事業` の `### 見出し` |
+| 代表者挨拶 | MESSAGE | frontmatter と `## 本文` |
+
+決められた見出しの中身だけがサイトに出る。`## 関連` やメモの見出しを足しても
+サイトには影響しないので、ノートには背景や補足を自由に書いてよい。
+
+拠点を増やすときは会社概要ノートの `offices` に足す。会社概要テーブル・
+OFFICE LOCATIONS・フッターの3か所に自動で反映される。`map_query` を書いた拠点だけ
+地図が付く。
+
 ## 公開の仕組み
 
 1. Obsidian でノートを書く
 2. `main` ブランチに push する
-3. GitHub Actions が `npm run build` を実行し、`vault/INDEX.md`・`notes/*.html`・`sitemap.xml` を更新してコミットする
+3. GitHub Actions が `npm run build` を実行し、`index.html`・`vault/INDEX.md`・
+   `notes/*.html`・`sitemap.xml` を更新してコミットする
 4. GitHub Pages に反映される
 
-`publish: true` でないノートはサイトには出ません。
+2種類の出方があります。
+
+- **サイト本文**: `site:` 付きのノート（上の表）→ トップページの該当セクション
+- **ノート記事**: `publish: true` のノート → `/notes/<slug>.html` として独立ページ
+
+どちらでもないノートは、AI と自分のための記憶として vault に残るだけで公開されません。
 
 ## ⚠️ このリポジトリは公開（public）です
 

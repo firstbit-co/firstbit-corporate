@@ -53,11 +53,30 @@ publish: false
 - サイトに出したいノートだけ `publish: true` にして、`slug: cost-reduction-2026` のように
   半角英数の `slug` を付ける（日本語タイトルのままだと URL が読みにくくなるため）
 
-## 5. 公開の流れ
+## 5. サイト本文を直す
+
+トップページの文章・住所・社名は `vault/10-company/` の `site:` 付きノートが出どころ。
+たとえば代表者挨拶を書き換えたいときは `代表者挨拶.md` の `## 本文` を直すだけでよい。
+`index.html` を直接編集してはいけない（次のビルドで上書きされる）。
+
+| 直したいもの | 開くノート |
+| --- | --- |
+| ページタイトル・説明文・OGP・お問い合わせ文 | サイト設定 |
+| 社名・代表者・拠点・連絡先 | 会社概要 |
+| トップの見出しとリード文 | ヒーロー |
+| ABOUT | 社名に込めた想い |
+| 理念・ビジョン・価値観 | 理念・ビジョン |
+| 事業内容のカード | 事業内容 |
+| 代表者挨拶 | 代表者挨拶 |
+
+レイアウト（HTML の骨格やクラス名）を変えるときだけ `templates/index.html` と
+`scripts/site.mjs` を触る。
+
+## 6. 公開の流れ
 
 ```
 Obsidian で編集 → main に push → GitHub Actions が npm run build
-                → vault/INDEX.md, notes/*.html, sitemap.xml を自動コミット
+                → index.html, vault/INDEX.md, notes/*.html, sitemap.xml を自動コミット
                 → GitHub Pages に反映
 ```
 
@@ -69,7 +88,7 @@ npm run build   # 生成
 npm run check   # 生成物が最新かどうかだけ確認
 ```
 
-## 6. Claude に読ませる
+## 7. Claude に読ませる
 
 `CLAUDE.md` に「まず `vault/INDEX.md` を読む」と書いてあるので、
 Claude Code でこのリポジトリを開けば、vault のノートを前提に回答するようになる。

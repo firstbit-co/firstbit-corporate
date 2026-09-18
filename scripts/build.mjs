@@ -19,9 +19,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
 import { marked } from 'marked';
+import { renderIndexHtml } from './site.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const VAULT_DIR = path.join(ROOT, 'vault');
+const TEMPLATE_FILE = path.join(ROOT, 'templates', 'index.html');
 const NOTES_DIR = path.join(ROOT, 'notes');
 const SITE_URL = 'https://firstbit-co.github.io/firstbit-corporate/';
 const SITE_NAME = '株式会社Firstbit';
@@ -85,16 +87,13 @@ function toDateString(value, fallbackFile) {
   return gitDate(fallbackFile) ?? fs.statSync(fallbackFile).mtime.toISOString().slice(0, 10);
 }
 
-/** トップページの lastmod。index.html のコミット日 → 既存 sitemap の値 → 今日。 */
-function homeLastmod() {
-  const fromGit = gitDate(path.join(ROOT, 'index.html'));
-  if (fromGit) return fromGit;
-  const sitemap = path.join(ROOT, 'sitemap.xml');
-  if (fs.existsSync(sitemap)) {
-    const match = fs.readFileSync(sitemap, 'utf8').match(/<lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/);
-    if (match) return match[1];
-  }
-  return TODAY;
+/**
+ * トップページの lastmod。index.html は生成物なのでコミット日を見ても意味がない。
+ * サイト本文になっているノート（frontmatter に site: があるもの）の最終更新日を使う。
+ */
+function homeLastmod(notes) {
+  const dates = notes.filter((n) => n.data?.site).map((n) => n.updated);
+  return dates.length > 0 ? dates.reduce((a, b) => (a > b ? a : b)) : TODAY;
 }
 
 function firstHeading(body) {
@@ -107,7 +106,10 @@ function firstParagraph(body) {
     .replace(/^#.*$/gm, '')
     .replace(/!?\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (_, target, alias) => alias || target)
     .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
-    .replace(/[*_`>#-]/g, '')
+    .replace(/^\s*[>\-*+]\s*/gm, '')
+    .replace(/`([^`]*)`/g, '$1')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\*([^*]+)\*/g, '$1')
     .split(/\n{2,}/)
     .map((p) => p.trim())
     .find((p) => p.length > 0);
@@ -134,6 +136,7 @@ function collectNotes() {
     return {
       file,
       relPath,
+      data,
       folder: path.dirname(relPath) === '.' ? '(vault直下)' : path.dirname(relPath),
       basename,
       title: (data.title && String(data.title).trim()) || firstHeading(content) || basename,
@@ -439,11 +442,11 @@ function indexMarkdown(notes) {
   return lines.join('\n');
 }
 
-function sitemapXml(published) {
+function sitemapXml(published, notes) {
   const urls = [
     `  <url>
     <loc>${SITE_URL}</loc>
-    <lastmod>${homeLastmod()}</lastmod>
+    <lastmod>${homeLastmod(notes)}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>`,
@@ -499,6 +502,7 @@ function build() {
   const byPath = new Map(notes.map((n) => [n.relPath, n]));
   const files = new Map();
 
+  files.set('index.html', renderIndexHtml(fs.readFileSync(TEMPLATE_FILE, 'utf8'), notes));
   files.set('vault/INDEX.md', indexMarkdown(notes));
   files.set('notes/index.html', notesIndexPage(published));
   for (const note of published) {
@@ -507,7 +511,7 @@ function build() {
       .filter((n) => n && n.publish && n.relPath !== note.relPath);
     files.set(`notes/${note.slug}.html`, notePage(note, related));
   }
-  files.set('sitemap.xml', sitemapXml(published));
+  files.set('sitemap.xml', sitemapXml(published, notes));
 
   return { files, notes, published };
 }
