@@ -1,0 +1,16 @@
+# Node
+node_modules/
+
+# Obsidian のローカル状態（端末ごとに変わるのでコミットしない）
+vault/.obsidian/workspace.json
+vault/.obsidian/workspace-mobile.json
+vault/.obsidian/cache
+vault/.obsidian/plugins/*/data.json
+vault/.trash/
+
+# 外部に出したくないノート置き場（このリポジトリは public）
+vault/99-private/
+
+# OS
+.DS_Store
+Thumbs.db
