@@ -38,6 +38,45 @@ def sha256_of(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+# 走査から除外するディレクトリ
+EXCLUDE_DIRS = {".git", "__pycache__", ".venv", "node_modules"}
+
+
+def iter_repo_files():
+    """リポジトリ内の実ファイルを列挙する。
+
+    生成物(__pycache__ 等)と INDEX.md 自身は除く。INDEX.md を含めると
+    自分のサイズを自分に書くことになり、書き込む度にサイズが変わって
+    内容が収束しなくなる。
+    """
+    for path in sorted(ROOT.rglob("*")):
+        if not path.is_file():
+            continue
+        if EXCLUDE_DIRS & set(path.parts):
+            continue
+        if path == INDEX_MD:
+            continue
+        yield path
+
+
+DATE_LINE = re.compile(r"^(> 最終生成|# 書き出し日): \d{4}-\d{2}-\d{2}$", re.MULTILINE)
+
+
+def write_if_changed(path: Path, text: str) -> bool:
+    """日付行だけの差分なら書き込まない。
+
+    生成物に日付を埋めているため、内容が同じでも日をまたぐと git 上で
+    差分が出てしまう。日付を無視した比較で同一なら既存ファイルを残す。
+    戻り値は実際に書き込んだかどうか。
+    """
+    if path.exists():
+        current = path.read_text(encoding="utf-8")
+        if DATE_LINE.sub("", current) == DATE_LINE.sub("", text):
+            return False
+    path.write_text(text, encoding="utf-8")
+    return True
+
+
 # --------------------------------------------------------------------------
 # export: HTML から本文テキストを抜き出して NotebookLM 投入用に書き出す
 # --------------------------------------------------------------------------
@@ -102,11 +141,12 @@ def cmd_export() -> int:
             f"# 書き出し日: {date.today().isoformat()}\n\n"
         )
         out = SOURCES / out_name
-        out.write_text(header + body, encoding="utf-8")
+        wrote = write_if_changed(out, header + body)
         before, after = src.stat().st_size, len(body.encode("utf-8"))
+        state = "" if wrote else " [変更なし]"
         print(
             f"{rel} -> {out.relative_to(ROOT)} "
-            f"({before:,}B -> {after:,}B / 概算 {est_tokens(body):,} tokens)"
+            f"({before:,}B -> {after:,}B / 概算 {est_tokens(body):,} tokens){state}"
         )
     print("\nこのファイルを NotebookLM にアップロードしてください。")
     print("PDF はそのまま NotebookLM にアップロードできます(変換不要)。")
@@ -228,9 +268,7 @@ def cmd_index() -> int:
     ]
 
     big_files = []
-    for path in sorted(ROOT.rglob("*")):
-        if not path.is_file() or ".git" in path.parts:
-            continue
+    for path in iter_repo_files():
         size = path.stat().st_size
         if size < 20_000:
             continue
@@ -280,16 +318,14 @@ def cmd_index() -> int:
         "## 4. 小さいファイル(そのまま読んでよい)",
         "",
     ]
-    for path in sorted(ROOT.rglob("*")):
-        if not path.is_file() or ".git" in path.parts:
-            continue
+    for path in iter_repo_files():
         size = path.stat().st_size
         if 0 < size < 20_000 and path.suffix in {".xml", ".txt", ".md", ".json", ".yml", ".yaml"}:
             lines.append(f"- `{path.relative_to(ROOT)}` ({size:,}B)")
     lines.append("")
 
-    INDEX_MD.write_text("\n".join(lines), encoding="utf-8")
-    print(f"生成: {INDEX_MD.relative_to(ROOT)}")
+    wrote = write_if_changed(INDEX_MD, "\n".join(lines))
+    print(f"生成: {INDEX_MD.relative_to(ROOT)}" + ("" if wrote else " [変更なし]"))
     for warning in warnings:
         print(f"  ⚠️  {warning}")
     return 0

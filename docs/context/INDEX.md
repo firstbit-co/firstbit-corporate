@@ -1,7 +1,7 @@
 # コンテキスト索引(自動生成)
 
 > `python3 tools/nblm.py index` で再生成されます。手で編集しないでください。
-> 最終生成: 2026-09-17
+> 最終生成: 2026-09-18
 
 **Claude Code へ: まずこのファイルを読み、必要な範囲だけを `sed -n 'A,Bp'` で開いてください。**
 大きなファイルを丸ごと読むのは禁止です(下の「読んではいけないファイル」参照)。
@@ -61,7 +61,6 @@
 ## 4. 小さいファイル(そのまま読んでよい)
 
 - `CLAUDE.md` (2,238B)
-- `docs/context/INDEX.md` (3,592B)
 - `docs/notebooklm/README.md` (3,863B)
 - `docs/notebooklm/sources/index.html.txt` (10,588B)
 - `docs/notebooklm/summaries/_TEMPLATE.md` (504B)
