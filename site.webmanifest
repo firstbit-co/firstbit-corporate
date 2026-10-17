@@ -1,0 +1,17 @@
+{
+  "name": "株式会社First bit",
+  "short_name": "First bit",
+  "description": "株式会社First bitの公式サイト",
+  "start_url": "/firstbit-corporate/",
+  "display": "browser",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "/firstbit-corporate/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
