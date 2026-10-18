@@ -35,6 +35,25 @@
 | 口ぐせ | 「今夜は晴れるかな〜」 |
 | 特徴 | 昼はスリット(頭のすじ)を閉じてお昼寝。夜になるとスリットが開いて、頭の中から星がのぞく |
 
+### イラスト(ラフ)
+
+![キャラクターシート](mascot/makuran/sheet.png)
+
+![キービジュアル](mascot/makuran/keyvisual.png)
+
+| ファイル | 用途 |
+| --- | --- |
+| `mascot/makuran/night-pillow.svg` | 基本ポーズ(夜・まくら) |
+| `mascot/makuran/day-sleep.svg` | 休館日・お昼寝 |
+| `mascot/makuran/open-tonight.svg` | 今夜は開催! |
+| `mascot/makuran/cancelled.svg` | くもりで中止… |
+| `mascot/makuran/wish.svg` | 願い星★宅配便の案内 |
+| `mascot/makuran/observe.svg` | 観望ガイド |
+| `mascot/makuran/keyvisual.svg` / `.png` | 1200×630 のキービジュアル(採用後は OGP 画像 `public/og.png` に転用できる) |
+
+SVG は `node docs/mascot/generate.mjs`(差分)と `node docs/mascot/keyvisual.mjs`(一枚絵)で作り直せる。表情・ポーズを増やすときは `generate.mjs` の `VARIANTS` に追加する。
+キービジュアルには「DRAFT」の表記を入れてある。正式採用・清書の前に外部へ出さないこと。
+
 **推す理由**
 - **地名が由来**で、ほかの天文台にはまねできない。
 - ドームのシルエットなので、**ロゴやアイコンにしても天文台だとわかる**。
