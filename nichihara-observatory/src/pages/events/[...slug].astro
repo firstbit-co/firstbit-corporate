@@ -1,0 +1,52 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CONTACT, SITE } from '../../data/facility';
+import { formatDate, getEvents } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const events = await getEvents();
+  return events.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const day = d.date.toISOString().slice(0, 10);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: d.title,
+  description: d.summary,
+  startDate: d.startTime ? `${day}T${d.startTime}:00+09:00` : day,
+  ...(d.endTime ? { endDate: `${day}T${d.endTime}:00+09:00` } : {}),
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  eventStatus: 'https://schema.org/EventScheduled',
+  location: { '@type': 'Place', name: SITE.name, address: CONTACT.address.value },
+  organizer: { '@type': 'Organization', name: SITE.name, url: Astro.site?.toString() },
+};
+---
+
+<BaseLayout title={d.title} description={d.summary} jsonLd={jsonLd}>
+  <header class="page-header">
+    <div class="container">
+      <p><span class="tag">{d.category}</span></p>
+      <h1>{d.title}</h1>
+      <p>{d.summary}</p>
+    </div>
+  </header>
+
+  <div class="container prose">
+    <table class="table">
+      <tbody>
+        <tr><th scope="row">日時</th><td>{formatDate(d.date)} {d.startTime && `${d.startTime}〜${d.endTime ?? ''}`}</td></tr>
+        {d.fee && <tr><th scope="row">料金</th><td>{d.fee}</td></tr>}
+        {d.capacity && <tr><th scope="row">定員</th><td>{d.capacity}</td></tr>}
+        <tr><th scope="row">予約</th><td>{d.reservation}</td></tr>
+      </tbody>
+    </table>
+    <Content />
+    <p><a href="/events/">イベント一覧へ戻る</a></p>
+  </div>
+</BaseLayout>

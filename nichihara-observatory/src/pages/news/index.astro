@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate, getNews } from '../../lib/content';
+
+const news = await getNews();
+---
+
+<BaseLayout title="お知らせ" description="日原天文台からのお知らせ(休館・営業、道路・アクセス情報など)。">
+  <header class="page-header">
+    <div class="container">
+      <h1>お知らせ</h1>
+    </div>
+  </header>
+
+  <div class="container">
+    <ul class="list">
+      {
+        news.map((n) => (
+          <li>
+            <time datetime={n.data.date.toISOString()}>{formatDate(n.data.date)}</time>
+            <span class="tag">{n.data.category}</span>
+            <a href={`/news/${n.id}/`}>{n.data.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</BaseLayout>

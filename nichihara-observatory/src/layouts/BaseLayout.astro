@@ -1,0 +1,86 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { CONTACT, SITE } from '../data/facility';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: 'ja' | 'en';
+  /** ページ固有の構造化データ(Event など)を追加するとき */
+  jsonLd?: Record<string, unknown>;
+}
+
+const { title, description = SITE.description, lang = 'ja', jsonLd } = Astro.props;
+const fullTitle = title ? `${title}|${SITE.name}` : `${SITE.name}|${SITE.tagline}(島根県津和野町)`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+// 公開日まではインデックスさせない(.env.example 参照)
+const allowIndex = import.meta.env.PUBLIC_ALLOW_INDEX === 'true';
+
+const siteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': ['TouristAttraction', 'Place'],
+  name: SITE.name,
+  alternateName: [SITE.nameKana, SITE.nameEn],
+  description: SITE.description,
+  url: Astro.site?.toString(),
+  telephone: CONTACT.tel.value,
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'JP',
+    addressRegion: '島根県',
+    addressLocality: '鹿足郡津和野町',
+    streetAddress: '枕瀬806-1',
+    ...(CONTACT.postalCode.value ? { postalCode: CONTACT.postalCode.value } : {}),
+  },
+  ...(CONTACT.geo.value
+    ? { geo: { '@type': 'GeoCoordinates', latitude: CONTACT.geo.value.lat, longitude: CONTACT.geo.value.lng } }
+    : {}),
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={allowIndex ? 'index,follow' : 'noindex,nofollow'} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#0b1020" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={lang === 'ja' ? 'ja_JP' : 'en_US'} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <!-- TODO: 1200x630 の OGP 画像を public/og.png に置いたら og:image を追加し、twitter:card を summary_large_image にする -->
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="alternate" hreflang="ja" href={new URL('/', Astro.site)} />
+    <link rel="alternate" hreflang="en" href={new URL('/en/', Astro.site)} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(siteJsonLd)} />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+
+    <script is:inline>
+      // 赤色ナイトモードをちらつきなく適用(切替は Header.astro)
+      try {
+        if (localStorage.getItem('nichihara-theme') === 'red') document.documentElement.dataset.theme = 'red';
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">本文へスキップ</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

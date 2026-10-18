@@ -1,0 +1,144 @@
+---
+/**
+ * 「今日の開館状況/今夜の観望会/月齢」パネル。
+ * 静的サイトなのでビルド時ではなく閲覧時(ブラウザ)に判定する。
+ * データ: src/data/tonight.json(当日の開催可否)、src/data/calendar-overrides.json(例外日)
+ */
+import tonight from '../data/tonight.json';
+import overrides from '../data/calendar-overrides.json';
+import { SESSIONS, WEEKLY_CLOSED_DAYS } from '../data/facility';
+
+const payload = {
+  tonight,
+  overrides,
+  weeklyClosedDays: WEEKLY_CLOSED_DAYS.value,
+};
+---
+
+<section class="tonight card" aria-labelledby="tonight-heading" data-tonight={JSON.stringify(payload)}>
+  <h2 id="tonight-heading" class="tonight__heading">今日の日原天文台</h2>
+  <p class="tonight__date" data-slot="date"></p>
+  <dl class="tonight__list">
+    <div>
+      <dt>開館状況</dt>
+      <dd data-slot="open">読み込み中…</dd>
+    </div>
+    <div>
+      <dt>今夜の天体観望</dt>
+      <dd data-slot="night">—</dd>
+    </div>
+    <div>
+      <dt>月齢(目安)</dt>
+      <dd data-slot="moon">—</dd>
+    </div>
+  </dl>
+  <p class="tonight__hint muted" data-slot="hint"></p>
+  <p class="tonight__sessions muted">
+    {SESSIONS.map((s) => <span>{s.label} {s.time.value}</span>)}
+  </p>
+  <noscript>
+    <p>開館状況は <a href="/visit/">ご利用案内</a> をご覧いただくか、お電話でお問い合わせください。</p>
+  </noscript>
+</section>
+
+<script>
+  import { dayStatus } from '../lib/calendar';
+  import { moonPhase } from '../lib/moon';
+
+  type Payload = {
+    tonight: { date: string; status: 'scheduled' | 'held' | 'cancelled' | 'undecided'; message: string };
+    overrides: { date: string; open: boolean; reason: string }[];
+    weeklyClosedDays: number[];
+  };
+
+  const STATUS_LABEL: Record<Payload['tonight']['status'], string> = {
+    scheduled: '開催予定',
+    held: '開催します',
+    cancelled: '中止',
+    undecided: '判断中',
+  };
+
+  for (const el of document.querySelectorAll<HTMLElement>('[data-tonight]')) {
+    const data = JSON.parse(el.dataset.tonight ?? '{}') as Payload;
+    const slot = (name: string) => el.querySelector<HTMLElement>(`[data-slot="${name}"]`)!;
+    const now = new Date();
+
+    slot('date').textContent = now.toLocaleDateString('ja-JP', {
+      timeZone: 'Asia/Tokyo',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      weekday: 'short',
+    });
+
+    const today = dayStatus(now, data.weeklyClosedDays, data.overrides);
+    slot('open').textContent = today.open ? '開館' : `休館(${today.reason ?? '休館日'})`;
+    slot('open').dataset.state = today.open ? 'ok' : 'ng';
+
+    if (!today.open) {
+      slot('night').textContent = '休館日のため実施なし';
+    } else if (data.tonight.date === today.date) {
+      slot('night').textContent = `${STATUS_LABEL[data.tonight.status]} — ${data.tonight.message}`;
+      slot('night').dataset.state = data.tonight.status === 'cancelled' ? 'ng' : data.tonight.status === 'undecided' ? 'warn' : 'ok';
+    } else {
+      // 当日分が未更新なら断定しない
+      slot('night').textContent = '本日の開催可否はお電話でご確認ください';
+      slot('night').dataset.state = 'warn';
+    }
+
+    const moon = moonPhase(now);
+    slot('moon').textContent = `${moon.age.toFixed(1)}(${moon.name})`;
+    slot('hint').textContent = moon.hint;
+  }
+</script>
+
+<style>
+  .tonight__heading {
+    margin-top: 0;
+    font-size: 1.25rem;
+  }
+  .tonight__date {
+    margin: 0 0 var(--space-4);
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+  .tonight__list {
+    display: grid;
+    gap: var(--space-3);
+    margin: 0;
+  }
+  .tonight__list div {
+    display: grid;
+    grid-template-columns: 8.5em 1fr;
+    gap: var(--space-3);
+  }
+  .tonight__list dt {
+    color: var(--color-text-muted);
+  }
+  .tonight__list dd {
+    margin: 0;
+    font-weight: 700;
+  }
+  [data-state='ok'] {
+    color: var(--color-ok);
+  }
+  [data-state='warn'] {
+    color: var(--color-warn);
+  }
+  [data-state='ng'] {
+    color: var(--color-ng);
+  }
+  .tonight__sessions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-4);
+    font-size: 0.85rem;
+    margin-bottom: 0;
+  }
+  @media (max-width: 480px) {
+    .tonight__list div {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+</style>

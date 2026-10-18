@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Verify from '../components/Verify.astro';
+import { CLOSED_NOTES, CONTACT, FEES, SESSIONS } from '../data/facility';
+
+const yen = (v: number) => `${v.toLocaleString('ja-JP')}円`;
+---
+
+<BaseLayout title="ご利用案内" description="日原天文台の開館時間・料金・休館日・観望会の参加方法のご案内です。">
+  <header class="page-header">
+    <div class="container">
+      <h1>ご利用案内</h1>
+      <p>開館時間・料金・休館日のご案内です。天候により内容が変わる場合があります。</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>開館時間</h2>
+    <div class="grid">
+      {
+        SESSIONS.map((s) => (
+          <section class="card" id={s.id}>
+            <h3>{s.label}</h3>
+            <p class="time"><Verify fact={s.time} /></p>
+            <p>{s.description}</p>
+          </section>
+        ))
+      }
+    </div>
+
+    <h2>料金</h2>
+    <div class="table-wrap">
+      <table class="table table--stack">
+        <caption class="visually-hidden">利用料金</caption>
+        <thead>
+          <tr><th scope="col">区分</th><th scope="col">大人</th><th scope="col">子ども</th></tr>
+        </thead>
+        <tbody>
+          {
+            FEES.map((f) => (
+              <tr>
+                <th scope="row">{f.label}</th>
+                <td data-label="大人"><Verify fact={f.adult} format={yen} /></td>
+                <td data-label="子ども">{f.childLabel} <Verify fact={f.child} format={yen} /></td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+    <p class="muted">団体割引・未就学児の料金は現在確認中です。</p>
+
+    <h2>休館日</h2>
+    <ul>
+      {CLOSED_NOTES.map((n) => <li><Verify fact={n} /></li>)}
+    </ul>
+
+    <h2>観望会に参加される方へ</h2>
+    <ul class="prose">
+      <li>山頂は市街地より気温が低くなります。夏でも上着をお持ちください。</li>
+      <li>望遠鏡をのぞくときは、ライトやスマートフォンの画面の明るさにご配慮ください(このサイトの「赤色ナイトモード」もご利用いただけます)。</li>
+      <li>曇り・雨の日は、望遠鏡の見学や館内での解説に内容を変更する場合があります。</li>
+      <li>当日の開催状況はトップページ、またはお電話(<a href={`tel:${CONTACT.tel.value.replaceAll('-', '')}`}>{CONTACT.tel.value}</a>)でご確認ください。</li>
+    </ul>
+  </div>
+</BaseLayout>
+
+<style>
+  .time {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin: 0;
+  }
+</style>

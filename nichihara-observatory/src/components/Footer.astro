@@ -1,0 +1,61 @@
+---
+import { CONTACT, NAV, OPERATOR, SITE } from '../data/facility';
+import Verify from './Verify.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div>
+      <p class="site-footer__name">{SITE.name}<span lang="en"> / {SITE.nameEn}</span></p>
+      <address>
+        {CONTACT.postalCode.value && <>〒{CONTACT.postalCode.value} </>}<Verify fact={CONTACT.address} /><br />
+        TEL <a href={`tel:${CONTACT.tel.value.replaceAll('-', '')}`}><Verify fact={CONTACT.tel} /></a>
+      </address>
+      <p class="muted">運営:<Verify fact={OPERATOR} /></p>
+    </div>
+    <nav aria-label="フッターメニュー">
+      <ul>
+        {NAV.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        <li><a href="/privacy/">プライバシーポリシー</a></li>
+      </ul>
+    </nav>
+  </div>
+  <p class="container site-footer__copy">© {year} {SITE.name}</p>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-bg-sunken);
+    border-top: 1px solid var(--color-border);
+    padding-block: var(--space-12) var(--space-6);
+    font-size: 0.9rem;
+  }
+  .site-footer__inner {
+    display: grid;
+    gap: var(--space-8);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  }
+  .site-footer__name {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-top: 0;
+  }
+  address {
+    font-style: normal;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-2);
+  }
+  .site-footer__copy {
+    margin-top: var(--space-8);
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+  }
+</style>

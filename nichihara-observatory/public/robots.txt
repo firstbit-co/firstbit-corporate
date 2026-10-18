@@ -1,0 +1,6 @@
+# 公開前はクロールを止めておく。公開時に以下へ差し替え:
+# User-agent: *
+# Allow: /
+# Sitemap: https://<本番ドメイン>/sitemap-index.xml
+User-agent: *
+Disallow: /

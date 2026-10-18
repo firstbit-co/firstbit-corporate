@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CONTACT, SESSIONS, SITE } from '../../data/facility';
+
+// TODO(Phase 3): 英語版の拡充。料金・時間は facility.ts から読み、翻訳はネイティブチェックを通す
+---
+
+<BaseLayout
+  lang="en"
+  title={SITE.nameEn}
+  description="Nichihara Observatory in Tsuwano, Shimane — Japan's first public observatory, with a 75cm reflecting telescope open to visitors."
+>
+  <header class="page-header">
+    <div class="container">
+      <h1>{SITE.nameEn}</h1>
+      <p>Japan's first public observatory — Tsuwano, Shimane</p>
+    </div>
+  </header>
+  <div class="container prose">
+    <p>
+      Opened in 1985, the year Halley's Comet returned, Nichihara Observatory sits on the summit of Mt. Makurase overlooking
+      the confluence of the Tsuwano and Takatsu rivers. Look through the 75cm reflecting telescope at the Sun and bright
+      stars by day, and at planets, star clusters and nebulae by night.
+    </p>
+    <h2>Hours</h2>
+    <ul>
+      <li>Daytime visit: {SESSIONS[0].time.value}</li>
+      <li>Night observation: 19:00–22:00 (from 20:00 in summer)</li>
+      <li>Closed: Tuesdays, Wednesdays and January 1</li>
+    </ul>
+    <h2>Access</h2>
+    <p>About 5–15 minutes by taxi from JR Nichihara Station (Yamaguchi Line).</p>
+    <p>Address: 806-1 Makurase, Tsuwano-cho, Kanoashi-gun, Shimane, Japan</p>
+    <p>Tel: +81-856-74-1646 ({CONTACT.tel.value})</p>
+    <p><a href="/" lang="ja">日本語サイトへ</a></p>
+  </div>
+</BaseLayout>

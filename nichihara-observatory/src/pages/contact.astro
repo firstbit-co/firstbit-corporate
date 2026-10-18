@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Verify from '../components/Verify.astro';
+import { CONTACT } from '../data/facility';
+
+// フォーム送信先(Formspree / Google フォーム / 自前 API など)。未設定の間はフォームを出さない
+const formEndpoint = import.meta.env.PUBLIC_FORM_ENDPOINT as string | undefined;
+---
+
+<BaseLayout title="お問い合わせ" description="日原天文台へのお問い合わせ・団体見学のご相談。">
+  <header class="page-header">
+    <div class="container">
+      <h1>お問い合わせ</h1>
+      <p>団体見学・学校行事・取材のご相談もこちらから。</p>
+    </div>
+  </header>
+
+  <div class="container prose">
+    <h2>お電話</h2>
+    <p class="tel">
+      <a href={`tel:${CONTACT.tel.value.replaceAll('-', '')}`}><Verify fact={CONTACT.tel} /></a>
+    </p>
+    <!-- TODO(取材): 電話の受付時間を確認して記載 -->
+
+    {
+      CONTACT.email.value && (
+        <>
+          <h2>メール</h2>
+          <p><a href={`mailto:${CONTACT.email.value}`}>{CONTACT.email.value}</a></p>
+        </>
+      )
+    }
+
+    {
+      formEndpoint && (
+        <>
+          <h2>フォーム</h2>
+          <form class="form" action={formEndpoint} method="post">
+            <label>
+              お名前(必須)
+              <input name="name" required autocomplete="name" />
+            </label>
+            <label>
+              メールアドレス(必須)
+              <input name="email" type="email" required autocomplete="email" />
+            </label>
+            <label>
+              ご用件
+              <select name="topic">
+                <option>一般のお問い合わせ</option>
+                <option>団体見学・学校行事</option>
+                <option>取材・撮影</option>
+              </select>
+            </label>
+            <label>
+              内容(必須)
+              <textarea name="message" rows="6" required />
+            </label>
+            <p class="muted">
+              送信いただいた情報は、お問い合わせへの回答にのみ使用します(<a href="/privacy/">プライバシーポリシー</a>)。
+            </p>
+            <button class="button" type="submit">送信する</button>
+          </form>
+        </>
+      )
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .tel {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0;
+  }
+  .form {
+    display: grid;
+    gap: var(--space-4);
+  }
+  .form label {
+    display: grid;
+    gap: var(--space-1);
+  }
+  .form input,
+  .form select,
+  .form textarea {
+    font: inherit;
+    padding: var(--space-3);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-sunken);
+    color: var(--color-text);
+  }
+  .form button {
+    justify-self: start;
+    border: 0;
+    cursor: pointer;
+  }
+</style>

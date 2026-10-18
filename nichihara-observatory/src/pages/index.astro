@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Starfield from '../components/Starfield.astro';
+import TonightPanel from '../components/TonightPanel.astro';
+import Verify from '../components/Verify.astro';
+import { ACCESS, SITE, TELESCOPE } from '../data/facility';
+import { formatDate, getNews, getUpcomingEvents } from '../lib/content';
+
+const events = await getUpcomingEvents(3);
+const news = await getNews(3);
+const important = news.find((n) => n.data.important);
+---
+
+<BaseLayout>
+  {
+    important && (
+      <aside class="notice" aria-label="重要なお知らせ">
+        <div class="container">
+          <strong>重要</strong> <a href={`/news/${important.id}/`}>{important.data.title}</a>
+        </div>
+      </aside>
+    )
+  }
+
+  <section class="hero">
+    <Starfield />
+    <div class="container hero__inner">
+      <div class="hero__copy">
+        <p class="hero__eyebrow">島根県津和野町・枕瀬山の山頂</p>
+        <h1>{SITE.tagline}で、<br />75cmの望遠鏡をのぞこう。</h1>
+        <p class="hero__lead">
+          1985年、ハレー彗星がやってきた年に生まれた日原天文台。昼は太陽や昼間の星を、夜は季節の惑星や星雲・星団を、スタッフの解説付きで観察できます。
+        </p>
+        <p class="hero__actions">
+          <a class="button" href="/visit/">ご利用案内</a>
+          <a class="button button--ghost" href="/access/">アクセス</a>
+        </p>
+      </div>
+      <TonightPanel />
+    </div>
+  </section>
+
+  <section class="container" aria-labelledby="highlights">
+    <h2 id="highlights">日原天文台の楽しみ方</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>口径<Verify fact={TELESCOPE.aperture} />の反射望遠鏡</h3>
+        <p><Verify fact={TELESCOPE.story} /> 教科書に載っている天体を、自分の目で確かめられます。</p>
+        <a href="/facility/#telescope">望遠鏡について</a>
+      </article>
+      <article class="card">
+        <h3>昼間も星が見える</h3>
+        <p>晴れた日の昼間は、望遠鏡で太陽や明るい星・惑星を観察できます。夜に来られない方や小さなお子さま連れにもおすすめです。</p>
+        <a href="/visit/#day">昼の見学</a>
+      </article>
+      <article class="card">
+        <h3>星と森の科学館</h3>
+        <p>宇宙と地球環境をテーマにした展示施設。ほかの天体での重力の違いを体験できるコーナーもあります。</p>
+        <a href="/facility/#museum">科学館について</a>
+      </article>
+      <article class="card">
+        <h3>願い星★宅配便</h3>
+        <p>天文台の階段横にあるポストに願いごとを投函できます。星に願いを届ける、日原天文台ならではの体験です。</p>
+        <a href="/facility/#wish">くわしく</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="container" aria-labelledby="events">
+    <h2 id="events">これからのイベント</h2>
+    {
+      events.length ? (
+        <ul class="list">
+          {events.map((e) => (
+            <li>
+              <time datetime={e.data.date.toISOString()}>{formatDate(e.data.date)}</time>
+              <span class="tag">{e.data.category}</span>
+              <a href={`/events/${e.id}/`}>{e.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="muted">現在予定されているイベントはありません。</p>
+      )
+    }
+    <p><a href="/events/">イベント一覧へ</a></p>
+  </section>
+
+  <section class="container" aria-labelledby="news">
+    <h2 id="news">お知らせ</h2>
+    <ul class="list">
+      {
+        news.map((n) => (
+          <li>
+            <time datetime={n.data.date.toISOString()}>{formatDate(n.data.date)}</time>
+            <span class="tag">{n.data.category}</span>
+            <a href={`/news/${n.id}/`}>{n.data.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+    <p><a href="/news/">お知らせ一覧へ</a></p>
+  </section>
+
+  <section class="container" aria-labelledby="access">
+    <h2 id="access">アクセス</h2>
+    <div class="card">
+      <p><Verify fact={ACCESS.location} /></p>
+      <p><Verify fact={ACCESS.train} /></p>
+      <p class="muted"><Verify fact={ACCESS.roadNotice} /></p>
+      <a class="button button--ghost" href="/access/">アクセス詳細・地図</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .notice {
+    background: var(--color-accent);
+    color: #1a1200;
+    padding-block: var(--space-2);
+    font-size: 0.95rem;
+  }
+  .notice a {
+    color: #1a1200;
+    font-weight: 700;
+  }
+  .hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding-block: var(--space-16);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .hero__inner {
+    display: grid;
+    gap: var(--space-8);
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    align-items: center;
+  }
+  .hero__eyebrow {
+    color: var(--color-accent);
+    font-weight: 700;
+    margin: 0;
+  }
+  .hero h1 {
+    font-family: var(--font-serif);
+    margin-block: var(--space-3) var(--space-6);
+  }
+  .hero__lead {
+    max-width: 36rem;
+  }
+  .hero__actions {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+  @media (max-width: 860px) {
+    .hero {
+      padding-block: var(--space-8);
+    }
+    .hero__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
