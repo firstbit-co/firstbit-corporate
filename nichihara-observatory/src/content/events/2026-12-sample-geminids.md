@@ -5,8 +5,6 @@ startTime: "20:00"
 endTime: "22:00"
 category: 天文現象
 summary: "三大流星群のひとつ、ふたご座流星群を山頂で観察します(書き方見本)。"
-reservation: 先着順
-capacity: "30名"
 draft: false
 ---
 

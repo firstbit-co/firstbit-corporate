@@ -33,11 +33,13 @@ npm run dev    # http://localhost:4321
 | [`docs/04-content-inventory.md`](docs/04-content-inventory.md) | 施設への確認リスト(ヒアリングシート) |
 | [`docs/05-cursor-handoff.md`](docs/05-cursor-handoff.md) | Cursor への引き継ぎ手順・指示文の例 |
 | [`docs/06-mascot.md`](docs/06-mascot.md) | ゆるキャラ案(最新案「にちはらん」ほか。ラフ画は `docs/mascot/`) |
+| [`docs/07-copy-rules.md`](docs/07-copy-rules.md) | 表記ルールとトップの確定稿(`npm run check:copy` で検査) |
 | [`AGENTS.md`](AGENTS.md) | AI エージェント向けのプロジェクト規約 |
 
 ## 実装済みの機能
 
-- **今日の日原天文台パネル**: 開館/休館、今夜の観望会の開催可否、月齢と観望のひとこと
+- **トップ(確定稿)**: 来館の要点(休館・開館時間・料金・予約)、天文台の紹介、来館の流れ、Google カレンダーの予定、宿泊施設
+- **表記ルールの自動検査**: `npm run check:copy`(`docs/07-copy-rules.md`)
 - **赤色ナイトモード**: 観望中にスマホを見ても目の暗順応を妨げにくい配色
 - **施設情報の一元管理**: `src/data/facility.ts`(料金・時間・住所などをここだけで管理)
 - **Markdown でイベント・お知らせ追加**: `src/content/`
@@ -53,7 +55,7 @@ npm run dev    # http://localhost:4321
 ├── docs/                        分析・要件・ロードマップ・引き継ぎ
 ├── public/                      favicon, robots.txt(公開前は Disallow)
 ├── src/
-│   ├── components/              Header, Footer, TonightPanel, Starfield, Verify
+│   ├── components/              Header, Footer, Verify, ComingSoon, TonightPanel(今はトップ未使用), Starfield
 │   ├── content/                 events/, news/(Markdown)
 │   ├── content.config.ts        記事のスキーマ
 │   ├── data/                    facility.ts, tonight.json, calendar-overrides.json
@@ -68,7 +70,7 @@ npm run dev    # http://localhost:4321
 
 | やりたいこと | 編集するファイル |
 | --- | --- |
-| 今夜の観望会の開催/中止を知らせる | `src/data/tonight.json` の `date` `status` `message` |
+| 予定を知らせる | 施設の Google カレンダーを更新(トップに埋め込み) |
 | 臨時休館・祝日開館を登録 | `src/data/calendar-overrides.json` |
 | イベントを追加 | `src/content/events/` に Markdown を追加 |
 | お知らせを追加 | `src/content/news/` に Markdown を追加 |
@@ -80,7 +82,9 @@ npm run dev    # http://localhost:4321
 
 - [ ] `docs/04-content-inventory.md` の要確認項目がすべて確認済み(`npm run dev` で「要確認」バッジが0個)
 - [ ] 【サンプル】記事をすべて削除・差し替え
-- [ ] `src/data/tonight.json` のサンプル文言を差し替え
+- [ ] トップの背景 `public/images/dome-night.jpg`(今は仮画像のイラスト)を本物の写真に差し替え
+- [ ] 写真・学習資料・友の会のページ(今は「準備中」)の中身
+- [ ] `npm run check:copy` が通る
 - [ ] 写真・OGP 画像(`public/og.png`)・ロゴ
 - [ ] プライバシーポリシーを正式文面に
 - [ ] お問い合わせ手段の確定(メール公開 or `PUBLIC_FORM_ENDPOINT`)

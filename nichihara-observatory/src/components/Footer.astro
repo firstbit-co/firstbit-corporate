@@ -1,5 +1,5 @@
 ---
-import { CONTACT, NAV, OPERATOR, SITE } from '../data/facility';
+import { CONTACT, FOOTER_LINKS, NAV, OPERATOR, SITE } from '../data/facility';
 import Verify from './Verify.astro';
 
 const year = new Date().getFullYear();
@@ -17,8 +17,7 @@ const year = new Date().getFullYear();
     </div>
     <nav aria-label="フッターメニュー">
       <ul>
-        {NAV.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
-        <li><a href="/privacy/">プライバシーポリシー</a></li>
+        {[...NAV, ...FOOTER_LINKS].map((item) => <li><a href={item.href}>{item.label}</a></li>)}
       </ul>
     </nav>
   </div>
@@ -51,7 +50,8 @@ const year = new Date().getFullYear();
     padding: 0;
     margin: 0;
     display: grid;
-    gap: var(--space-2);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2) var(--space-6);
   }
   .site-footer__copy {
     margin-top: var(--space-8);

@@ -70,7 +70,9 @@ Cursor は `AGENTS.md` と `.cursor/rules/` を自動で読み込む。プロジ
 | --- | --- |
 | `src/data/facility.ts` | 施設情報の唯一の置き場。`Fact<T>`(value + verified + note) |
 | `src/components/Verify.astro` | 未確認情報に dev 時のみ「要確認」バッジ |
-| `src/components/TonightPanel.astro` | 今日の開館状況・今夜の観望会・月齢(閲覧時にブラウザで判定) |
+| `src/pages/index.astro` | トップ。出力は確定稿 `docs/copy/home-main.html` と同じ(`npm run check:copy` で検査) |
+| `src/styles/site.css` | トップなどの部品(`.stage` `.facts` `.story-copy` `.mascot-spot` `.visit-steps`) |
+| `src/components/TonightPanel.astro` | 今日の開館状況・今夜の観望会・月齢(今はトップ未使用) |
 | `src/lib/calendar.ts` | 定休日+例外日(`calendar-overrides.json`)で開館判定。JST |
 | `src/lib/moon.ts` | 月齢の簡易計算(誤差〜1日。「目安」と表記) |
 | `src/lib/content.ts` | events/news の取得。公開ビルドに【サンプル】が残ると失敗 |

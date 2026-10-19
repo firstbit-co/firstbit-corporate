@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import '../styles/site.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { CONTACT, SITE } from '../data/facility';
@@ -13,7 +14,7 @@ interface Props {
 }
 
 const { title, description = SITE.description, lang = 'ja', jsonLd } = Astro.props;
-const fullTitle = title ? `${title}|${SITE.name}` : `${SITE.name}|${SITE.tagline}(島根県津和野町)`;
+const fullTitle = title ? `${title}|${SITE.name}` : `${SITE.name}|${SITE.tagline}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 // 公開日まではインデックスさせない(.env.example 参照)
 const allowIndex = import.meta.env.PUBLIC_ALLOW_INDEX === 'true';

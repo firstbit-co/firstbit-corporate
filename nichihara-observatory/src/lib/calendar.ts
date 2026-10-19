@@ -1,9 +1,8 @@
 /**
  * 開館日の判定。日付はすべて日本時間(JST)で扱う。
  *
- * 祝日の振替(「祝日の場合は翌平日」)は祝日データを持たないと自動判定できないため、
- * 当面は src/data/calendar-overrides.json に例外日を手で登録する運用とする。
- * 祝日の自動判定は docs/03-roadmap.md の Phase 2 を参照。
+ * 休館は毎週火曜・水曜と元日(祝日でも変わらない)。
+ * 臨時の休館・開館があるときだけ src/data/calendar-overrides.json に登録する。
  */
 
 export type CalendarOverride = {

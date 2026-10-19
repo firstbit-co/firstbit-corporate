@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SORABE_URL } from '../data/facility';
+---
+
+<BaseLayout title="周辺の案内" description="宿泊施設「宙辺 -SORABE-」と、枕瀬山キャンプ場・枕瀬山森林公園の案内です。">
+  <header class="page-header">
+    <div class="container">
+      <h1>周辺の案内</h1>
+      <p>天文台のある枕瀬山の一帯の案内です。</p>
+    </div>
+  </header>
+
+  <div class="container prose">
+    <section id="sorabe">
+      <h2>宿泊施設</h2>
+      <p>宿泊施設「宙辺 -SORABE-」があります。泊まるときの料金と予約は、宙辺のサイトで確認してください。天文台への入館とは別です。</p>
+      <p><a href={SORABE_URL}>宙辺 -SORABE-</a></p>
+    </section>
+
+    <section id="park">
+      <h2>枕瀬山キャンプ場・枕瀬山森林公園</h2>
+      <p>枕瀬山キャンプ場と枕瀬山森林公園も、同じ一帯にあります。</p>
+      <!-- TODO(取材): 利用方法・問い合わせ先・季節の利用期間 -->
+    </section>
+  </div>
+</BaseLayout>

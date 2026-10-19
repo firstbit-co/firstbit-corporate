@@ -1,17 +1,18 @@
 ---
 /**
  * 「今日の開館状況/今夜の観望会/月齢」パネル。
+ * 現在はトップに置いていない(予定は Google カレンダーで案内する確定稿のため)。必要になったら使う。
  * 静的サイトなのでビルド時ではなく閲覧時(ブラウザ)に判定する。
  * データ: src/data/tonight.json(当日の開催可否)、src/data/calendar-overrides.json(例外日)
  */
 import tonight from '../data/tonight.json';
 import overrides from '../data/calendar-overrides.json';
-import { SESSIONS, WEEKLY_CLOSED_DAYS } from '../data/facility';
+import { CLOSED, HOURS, range } from '../data/facility';
 
 const payload = {
   tonight,
   overrides,
-  weeklyClosedDays: WEEKLY_CLOSED_DAYS.value,
+  weeklyClosedDays: [...CLOSED.weekdays],
 };
 ---
 
@@ -34,10 +35,11 @@ const payload = {
   </dl>
   <p class="tonight__hint muted" data-slot="hint"></p>
   <p class="tonight__sessions muted">
-    {SESSIONS.map((s) => <span>{s.label} {s.time.value}</span>)}
+    <span>昼 {range(HOURS.day.start, HOURS.day.end)}</span>
+    <span>夜 {range(HOURS.night.start, HOURS.night.end)}(夏季は{HOURS.night.summerStart}開始)</span>
   </p>
   <noscript>
-    <p>開館状況は <a href="/visit/">ご利用案内</a> をご覧いただくか、お電話でお問い合わせください。</p>
+    <p>休館日と開館時間は <a href="/guide/">利用案内</a> で見てください。</p>
   </noscript>
 </section>
 
@@ -82,7 +84,7 @@ const payload = {
       slot('night').dataset.state = data.tonight.status === 'cancelled' ? 'ng' : data.tonight.status === 'undecided' ? 'warn' : 'ok';
     } else {
       // 当日分が未更新なら断定しない
-      slot('night').textContent = '本日の開催可否はお電話でご確認ください';
+      slot('night').textContent = 'その日の予定はカレンダーで見てください';
       slot('night').dataset.state = 'warn';
     }
 

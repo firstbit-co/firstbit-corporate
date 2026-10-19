@@ -13,8 +13,9 @@ Astro 7 の静的サイト。背景と方針は `docs/` を参照(まず `docs/0
 - `npm test` — `tests/` のユニットテスト(node --test)
 - `npm run check` — 型チェック
 - `npm run build` — 本番ビルド
+- `npm run check:copy` — 表記ルールとトップの確定稿の検査(ビルドのあとに実行)
 
-変更後は `npm test && npm run check && npm run build` が通ることを確認する。
+変更後は `npm test && npm run check && npm run build && npm run check:copy` が通ることを確認する。
 
 ## 絶対に守ること
 
@@ -22,6 +23,8 @@ Astro 7 の静的サイト。背景と方針は `docs/` を参照(まず `docs/0
 2. **施設情報は `src/data/facility.ts` に集約する。** ページに料金や時間を直書きしない。未確認の値は `verified: false` にして、表示には `<Verify fact={...} />` を使う。
 3. **公開前は検索エンジンに載せない。** `PUBLIC_ALLOW_INDEX` を勝手に true にしない。
 4. **サンプル記事(タイトルに【サンプル】)を本物の情報のように書き換えない。** 実データに置き換えるときはサンプル表記ごと消す。
+5. **表記ルール(`docs/07-copy-rules.md`)を守る。** 休館は毎週火曜・水曜と元日(金曜の休館は書かない)。見出しは「開館時間」「料金」。開館時間は変わることがあり、料金は変わらない。予約は受け付けていない。電話での確認はすすめない。「隣の」は使わない。
+6. **トップの本文は確定稿(`docs/copy/home-main.html`)どおり。** 変えるときは確定稿も一緒に直す。
 
 ## コーディング規約
 
@@ -36,6 +39,6 @@ Astro 7 の静的サイト。背景と方針は `docs/` を参照(まず `docs/0
 ## コンテンツの追加
 
 - イベント: `src/content/events/YYYY-MM-slug.md`(スキーマは `src/content.config.ts`)
-- お知らせ: `src/content/news/YYYY-MM-slug.md`。トップに帯で出すなら `important: true`
-- 当日の開催可否: `src/data/tonight.json`
-- 祝日などの例外日: `src/data/calendar-overrides.json`
+- お知らせ: `src/content/news/YYYY-MM-slug.md`(トップには出ない。`/news/` に並ぶ)
+- 予定: 施設の Google カレンダー(トップに埋め込み。URL は `facility.ts` の `CALENDAR_URL`)
+- 臨時の休館・開館: `src/data/calendar-overrides.json`(`TonightPanel` を使うときだけ)

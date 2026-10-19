@@ -1,0 +1,22 @@
+---
+/** 中身が決まっていないページの共通表示。内容が決まったらページ側を書き換えて、この部品は外す */
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <header class="page-header">
+    <div class="container">
+      <h1>{title}</h1>
+    </div>
+  </header>
+  <div class="container prose">
+    <p>このページは準備中です。</p>
+    <p><a href="/">トップページへ</a></p>
+  </div>
+</BaseLayout>

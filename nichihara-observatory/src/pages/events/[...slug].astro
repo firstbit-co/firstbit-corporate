@@ -42,8 +42,6 @@ const jsonLd = {
       <tbody>
         <tr><th scope="row">日時</th><td>{formatDate(d.date)} {d.startTime && `${d.startTime}〜${d.endTime ?? ''}`}</td></tr>
         {d.fee && <tr><th scope="row">料金</th><td>{d.fee}</td></tr>}
-        {d.capacity && <tr><th scope="row">定員</th><td>{d.capacity}</td></tr>}
-        <tr><th scope="row">予約</th><td>{d.reservation}</td></tr>
       </tbody>
     </table>
     <Content />

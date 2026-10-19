@@ -32,7 +32,7 @@ const C = COLORS;
 /** 線の共通属性(属性の重複は SVG として不正になるので太さは引数で渡す) */
 const sw = (w = 5) => `stroke="${C.line}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"`;
 
-export function star(cx, cy, r, inner = 0.45, round = false) {
+export function star(cx, cy, r, inner = 0.45) {
   const pts = [];
   for (let i = 0; i < 10; i++) {
     const rr = i % 2 ? r * inner : r;

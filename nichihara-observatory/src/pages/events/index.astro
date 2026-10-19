@@ -26,7 +26,6 @@ const past = all.filter((e) => e.data.date < today).reverse();
             <li>
               <time datetime={e.data.date.toISOString()}>{formatDate(e.data.date)}</time>
               <span class="tag">{e.data.category}</span>
-              {e.data.reservation !== '不要' && <span class="tag">{e.data.reservation}</span>}
               <a href={`/events/${e.id}/`}>{e.data.title}</a>
             </li>
           ))}

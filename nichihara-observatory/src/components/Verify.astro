@@ -3,8 +3,8 @@
  * 施設側の確認が取れていない情報(Fact.verified === false)を表示するときのラッパー。
  * 開発サーバーでのみ「要確認」バッジを出し、本番ビルドでは値だけを出す。
  *
- * 使い方: <Verify fact={SESSIONS[0].time} />
- *         <Verify fact={FEES[0].adult} format={(v) => `${v}円`} />
+ * 使い方: <Verify fact={CONTACT.tel} />
+ *         <Verify fact={ACCESS.train} />
  */
 import type { Fact } from '../data/facility';
 

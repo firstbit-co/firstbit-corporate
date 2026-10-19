@@ -14,8 +14,7 @@ const events = defineCollection({
     category: z.enum(['観望会', '天文現象', 'ワークショップ', '季節イベント', 'その他']),
     summary: z.string(),
     fee: z.string().optional(),
-    capacity: z.string().optional(),
-    reservation: z.enum(['不要', '要予約', '先着順']).default('不要'),
+    // 予約は受け付けていないため、予約・定員の項目は持たない(docs/07-copy-rules.md)
     /** true の間はビルドに含めない */
     draft: z.boolean().default(false),
   }),
