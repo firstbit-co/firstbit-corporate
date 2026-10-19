@@ -37,6 +37,8 @@ export const CLOSED = {
   /** 0=日曜 … 6=土曜 */
   weekdays: [2, 3],
   weekdaysLabel: '火曜・水曜',
+  /** トップでは休館日ではなく営業日を出す */
+  openDaysLabel: '木曜〜月曜',
   extraLabel: '元日',
 } as const;
 

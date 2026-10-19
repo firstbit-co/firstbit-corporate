@@ -3,18 +3,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { CLOSED, FEES, HOURS, RECEPTION, range, yen } from '../data/facility';
 ---
 
-<BaseLayout title="利用案内" description="日原天文台の休館日・開館時間・料金と、来館の流れの案内です。">
+<BaseLayout title="利用案内" description="日原天文台の営業日・開館時間・料金と、来館の流れの案内です。">
   <header class="page-header">
     <div class="container">
       <h1>利用案内</h1>
-      <p>休館日・開館時間・料金と、来館の流れです。</p>
+      <p>営業日・開館時間・料金と、来館の流れです。</p>
     </div>
   </header>
 
   <div class="container prose">
-    <section id="closed">
-      <h2>休館日</h2>
-      <p>毎週{CLOSED.weekdaysLabel}は休館です。{CLOSED.extraLabel}も休館です。</p>
+    <section id="days">
+      <h2>営業日</h2>
+      <p>{CLOSED.openDaysLabel}に開館しています。毎週{CLOSED.weekdaysLabel}と{CLOSED.extraLabel}は休館です。</p>
     </section>
 
     <section id="hours">
