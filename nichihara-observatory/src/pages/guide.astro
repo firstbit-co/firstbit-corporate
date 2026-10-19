@@ -43,18 +43,18 @@ import { CLOSED, FEES, HOURS, RECEPTION, range, yen } from '../data/facility';
         <table class="table table--stack">
           <caption class="visually-hidden">料金</caption>
           <thead>
-            <tr><th scope="col">区分</th><th scope="col">大人</th><th scope="col">学生</th></tr>
+            <tr><th scope="col">区分</th><th scope="col">大人</th><th scope="col">子ども</th></tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row">夜の天体観望</th>
               <td data-label="大人">{yen(FEES.adult)}</td>
-              <td data-label="学生">{yen(FEES.nightStudent)}</td>
+              <td data-label="子ども">{yen(FEES.nightStudent)}</td>
             </tr>
             <tr>
               <th scope="row">星と森の科学館</th>
               <td data-label="大人">{yen(FEES.adult)}</td>
-              <td data-label="学生">{yen(FEES.museumStudent)}</td>
+              <td data-label="子ども">{yen(FEES.museumStudent)}</td>
             </tr>
           </tbody>
         </table>
