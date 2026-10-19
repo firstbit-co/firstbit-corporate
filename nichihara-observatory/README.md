@@ -32,7 +32,7 @@ npm run dev    # http://localhost:4321
 | [`docs/03-roadmap.md`](docs/03-roadmap.md) | バージョンアップ計画(Phase 0〜3、KPI) |
 | [`docs/04-content-inventory.md`](docs/04-content-inventory.md) | 施設への確認リスト(ヒアリングシート) |
 | [`docs/05-cursor-handoff.md`](docs/05-cursor-handoff.md) | Cursor への引き継ぎ手順・指示文の例 |
-| [`docs/06-mascot.md`](docs/06-mascot.md) | ゆるキャラ案(マクラン/ハレぼう/ポラリ、ラフ画は `docs/mascot/`) |
+| [`docs/06-mascot.md`](docs/06-mascot.md) | ゆるキャラ案(最新案「にちはらん」ほか。ラフ画は `docs/mascot/`) |
 | [`AGENTS.md`](AGENTS.md) | AI エージェント向けのプロジェクト規約 |
 
 ## 実装済みの機能
