@@ -1,27 +1,67 @@
 ---
+/**
+ * 津和野の観光情報。内容は島根県・観光サイトの掲載より。営業時間や料金は書かず、公式の観光サイトへつなぐ。
+ * 鷺舞の記述は株式会社First bit の資料(津和野町の紹介)より。
+ */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SORABE_URL } from '../data/facility';
+
+const TSUWANO_KANKO = 'https://tsuwano-kanko.net/';
+
+const spots = [
+  { name: '殿町通り', text: '白い土塀と掘割が続く町のメインストリート。掘割には鯉が泳ぎ、初夏にはハナショウブが咲きます。' },
+  { name: '太皷谷稲成神社', text: '津和野藩主が創建した神社。参道に朱色の鳥居が連なる「千本鳥居」が見どころです。' },
+  { name: '津和野城跡', text: '城山の上に残る城跡。観光リフトで登ることができ、山の上から津和野の町を見下ろせます。' },
+  { name: '森鷗外旧宅・森鷗外記念館', text: '津和野出身の文豪・森鷗外ゆかりの場所です。' },
+  { name: '津和野カトリック教会', text: '昭和6年(1931年)にドイツ人のシェーファー神父によって建てられたゴシック様式の教会です。' },
+  { name: '鷺舞(さぎまい)', text: '毎年7月の祇園祭で町を練り歩く、津和野を代表する伝統行事。国の重要無形民俗文化財で、ユネスコ無形文化遺産「風流踊」のひとつです。' },
+  { name: '高津川', text: '水のきれいな川として知られ、鮎の名産地です。日原天文台のある枕瀬山のふもとを流れています。' },
+];
 ---
 
-<BaseLayout title="周辺の案内" description="宿泊施設「宙辺 -SORABE-」と、枕瀬山キャンプ場・枕瀬山森林公園の案内です。">
+<BaseLayout title="津和野の観光" description="日原天文台とあわせて楽しめる、津和野町の観光スポットの案内です。">
   <header class="page-header">
     <div class="container">
-      <h1>周辺の案内</h1>
-      <p>天文台のある枕瀬山の一帯の案内です。</p>
+      <h1>津和野の観光</h1>
+      <p>「山陰の小京都」と呼ばれる津和野。天文台とあわせて、町歩きも楽しめます。</p>
     </div>
   </header>
 
-  <div class="container prose">
-    <section id="sorabe">
-      <h2>宿泊施設</h2>
-      <p>宿泊施設「宙辺 -SORABE-」があります。泊まるときの料金と予約は、宙辺のサイトで確認してください。天文台への入館とは別です。</p>
-      <p><a href={SORABE_URL}>宙辺 -SORABE-</a></p>
-    </section>
+  <div class="container">
+    <ul class="spots">
+      {spots.map((s) => <li><h2>{s.name}</h2><p>{s.text}</p></li>)}
+    </ul>
+    <!-- TODO(写真): 各スポットの写真(使用許諾のあるもの) -->
 
-    <section id="park">
-      <h2>枕瀬山キャンプ場・枕瀬山森林公園</h2>
-      <p>枕瀬山キャンプ場と枕瀬山森林公園も、同じ一帯にあります。</p>
-      <!-- TODO(取材): 利用方法・問い合わせ先・季節の利用期間 -->
+    <section class="prose" id="more-info">
+      <h2>くわしい観光情報</h2>
+      <p>営業時間・料金・イベントなどは、津和野町観光協会のサイトで確認してください。</p>
+      <p><a class="button button-gold" href={TSUWANO_KANKO}>津和野町観光協会のサイトへ</a></p>
+      <p class="muted">天文台のある枕瀬山の一帯に泊まるなら、<a href="/sorabe/">宿泊の案内</a>もご覧ください。</p>
     </section>
   </div>
 </BaseLayout>
+
+<style>
+  .spots {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-8) 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: var(--space-4);
+  }
+  .spots li {
+    background: var(--color-bg-raised);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-6);
+  }
+  .spots h2 {
+    margin: 0 0 var(--space-2);
+    font-size: 1.2rem;
+  }
+  .spots p {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+</style>

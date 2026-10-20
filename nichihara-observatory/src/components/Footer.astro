@@ -1,5 +1,5 @@
 ---
-import { CONTACT, FOOTER_LINKS, NAV, OPERATOR, SITE } from '../data/facility';
+import { CONTACT, FOOTER_LINKS, NAV, SITE } from '../data/facility';
 import Verify from './Verify.astro';
 
 const year = new Date().getFullYear();
@@ -8,12 +8,11 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <div class="container site-footer__inner">
     <div>
-      <p class="site-footer__name">{SITE.name}<span lang="en"> / {SITE.nameEn}</span></p>
+      <p class="site-footer__name">{SITE.name}</p>
       <address>
         {CONTACT.postalCode.value && <>〒{CONTACT.postalCode.value} </>}<Verify fact={CONTACT.address} /><br />
         TEL <a href={`tel:${CONTACT.tel.value.replaceAll('-', '')}`}><Verify fact={CONTACT.tel} /></a>
       </address>
-      <p class="muted">運営:<Verify fact={OPERATOR} /></p>
     </div>
     <nav aria-label="フッターメニュー">
       <ul>

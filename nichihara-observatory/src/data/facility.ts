@@ -78,12 +78,6 @@ export const CONTACT = {
   geo: { value: null, verified: false } as Fact<{ lat: number; lng: number } | null>,
 };
 
-export const OPERATOR = {
-  value: '津和野町(管理運営:株式会社津和野開発)',
-  verified: false,
-  note: 'Wikipedia の記載。現行の指定管理者を町に確認',
-} satisfies Fact<string>;
-
 /** Google カレンダー(施設の公開カレンダー)。埋め込みと別タブ表示で同じ URL を使う */
 export const CALENDAR_URL =
   'https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FTokyo&src=bmljaGloYXJhb2JzQGdtYWlsLmNvbQ&src=OGZoM2d1Z3FyMThxcTV1ODQxcDY1ZmdpczhAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=aHQzamxmYWFjNWxmZDYyNjN1bGZoNHRxbDhAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=amEuamFwYW5lc2UjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039BE5&color=%23616161&color=%23E4C441&color=%23D50000';
@@ -99,11 +93,6 @@ export const SORABE_URL = 'https://sorabe.jp/';
 export const ACCESS = {
   train: { value: 'JR山口線「日原駅」からタクシーで約5〜15分', verified: false, note: '5分/15分の記載が混在' } satisfies Fact<string>,
   car: { value: '日原駅から枕瀬山キャンプ場方面へ。山頂付近に駐車場あり', verified: false } satisfies Fact<string>,
-  roadNotice: {
-    value: '2021年9月の土砂災害で通行止めとなっていた道路は、2025年4月に通行再開しました。',
-    verified: false,
-    note: '旧サイトのアクセスページの記載(検索結果経由)。現在の状況を確認',
-  } satisfies Fact<string>,
   location: { value: '津和野川と高津川の合流点を見下ろす枕瀬山(標高約255m)の山頂', verified: false } satisfies Fact<string>,
 };
 
@@ -138,6 +127,49 @@ export const HISTORY: { year: string; text: Fact<string> }[] = [
   { year: '2025年', text: { value: '旧ペンション北斗星が宿泊施設「宙辺 -SORABE-」としてリニューアル(7月7日)', verified: true } },
 ];
 
+/**
+ * 敷地内の施設(施設ページ)。fee が null の施設は利用料を確認中。
+ * 星と森の科学館・天文資料館の内容は、インターネットミュージアム/しまね観光ナビ/津和野町の掲載より。
+ */
+export const PARK_FACILITIES = {
+  museum: {
+    name: '星と森の科学館',
+    text: [
+      '天文学と森林を中心とした地球環境をテーマにした科学館です。映像や立体展示で、わかりやすく紹介しています。',
+      '夕焼けや月の満ち欠けなど身近な天体現象の展示や、太陽系の星と地球をくらべる展示があります。フーコーの振り子もあります。',
+    ],
+    fees: [
+      ['大人', '500円'],
+      ['子ども(高校生以下)', '200円'],
+    ] as [string, string][],
+    feeNote: '津和野町内に住民票がある方は無料です。入場券は天文資料館で買います。',
+  },
+  archive: {
+    name: '天文資料館(ポランの広場)',
+    text: ['天文台の受付です。来館したら、まずここで受付をします。星と森の科学館の入場券もここで買います。', 'ビデオの上映もしています。'],
+    feeNote: 'ビデオの上映は無料です。',
+  },
+  forest25: {
+    name: '25世紀の森',
+    text: [] as string[],
+    feeNote: '',
+  },
+  tennis: {
+    name: 'テニスコート',
+    text: [] as string[],
+    feeNote: '',
+  },
+};
+
+/** 枕瀬山キャンプ場(しまね観光ナビ等の掲載より。料金・期間は年によって変わるのでキャンプ場で確認してもらう) */
+export const CAMP = {
+  name: '枕瀬山キャンプ場',
+  tel: '0856-74-1143',
+  url: 'https://www.kankou-shimane.com/destination/46840',
+  season: '春から秋(冬は閉園)',
+  facilities: 'テントサイト、バンガロー、焼肉ハウス、温水シャワーなど',
+};
+
 /** 宿泊施設 宙辺 -SORABE-(株式会社First bit の資料より) */
 export const SORABE = {
   name: '宙辺 -SORABE-',
@@ -157,7 +189,7 @@ export const NAV = [
   { href: '/facilities/', label: '施設' },
   { href: '/access/', label: 'アクセス' },
   { href: '/sorabe/', label: '宿泊' },
-  { href: '/around/', label: '周辺' },
+  { href: '/around/', label: '津和野観光' },
   { href: '/news/', label: 'お知らせ' },
   { href: '/contact/', label: 'お問い合わせ' },
 ] as const;

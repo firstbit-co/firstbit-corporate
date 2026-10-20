@@ -18,12 +18,6 @@ const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURICompo
   </header>
 
   <div class="container prose">
-    <aside class="card road" aria-label="道路状況">
-      <h2>道路状況</h2>
-      <p><Verify fact={ACCESS.roadNotice} /></p>
-      <p class="muted">最新の道路状況は <a href="/news/">お知らせ</a> をご確認ください。</p>
-    </aside>
-
     <h2>住所</h2>
     <p><Verify fact={CONTACT.address} /></p>
     <p><a class="button button--ghost" href={mapUrl} rel="noopener" target="_blank">Googleマップで開く</a></p>
@@ -39,14 +33,3 @@ const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURICompo
     <!-- TODO(取材): 駐車台数、大型バスの可否、津和野・益田・山口方面からの所要時間 -->
   </div>
 </BaseLayout>
-
-<style>
-  .road {
-    margin-top: var(--space-8);
-    border-color: var(--color-warn);
-  }
-  .road h2 {
-    margin-top: 0;
-    font-size: 1.15rem;
-  }
-</style>

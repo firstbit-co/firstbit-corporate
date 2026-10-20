@@ -5,10 +5,10 @@
  * 表記ルール:「隣の」「隣接」は使わない。料金と予約は宙辺のサイトで案内する(天文台への入館とは別)。
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SORABE, SORABE_URL } from '../data/facility';
+import { CAMP, SORABE, SORABE_URL } from '../data/facility';
 ---
 
-<BaseLayout title="宙辺 -SORABE-" description="日原天文台のある枕瀬山の一帯に建つ、1棟貸しの宿泊施設「宙辺 -SORABE-」の紹介です。">
+<BaseLayout title="宙辺 -SORABE-" description="日原天文台のある枕瀬山の一帯に泊まる。1棟貸しの宿泊施設「宙辺 -SORABE-」と枕瀬山キャンプ場の案内です。">
   <header class="page-header sorabe-hero">
     <div class="container">
       <p class="eyebrow">泊まって、星を見る</p>
@@ -60,6 +60,18 @@ import { SORABE, SORABE_URL } from '../data/facility';
       <h2>ご予約</h2>
       <p>空室状況・料金・ご予約は、宙辺のサイトで確認してください。</p>
       <p><a class="button button-gold" href={SORABE_URL}>宙辺 -SORABE- のサイトへ</a></p>
+    </section>
+
+    <section class="prose" id="camp">
+      <h2>{CAMP.name}</h2>
+      <p>テントやバンガローで泊まりたい方には、同じ枕瀬山の一帯にある{CAMP.name}もあります。</p>
+      <ul>
+        <li>営業期間:{CAMP.season}</li>
+        <li>主な設備:{CAMP.facilities}</li>
+      </ul>
+      <p>利用期間・料金・予約は、{CAMP.name}(<a href={`tel:${CAMP.tel.replaceAll('-', '')}`}>{CAMP.tel}</a>)で確認してください。</p>
+      <p><a href={CAMP.url}>しまね観光ナビ「{CAMP.name}」</a></p>
+      <!-- TODO(取材): 今年の営業期間・定休日・料金をキャンプ場に確認して載せる(掲載サイトごとに違う) -->
     </section>
   </div>
 </BaseLayout>

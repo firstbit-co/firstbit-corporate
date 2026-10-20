@@ -9,9 +9,4 @@ export default defineConfig({
   site,
   trailingSlash: 'always',
   integrations: [sitemap()],
-  i18n: {
-    defaultLocale: 'ja',
-    locales: ['ja', 'en'],
-    routing: { prefixDefaultLocale: false },
-  },
 });

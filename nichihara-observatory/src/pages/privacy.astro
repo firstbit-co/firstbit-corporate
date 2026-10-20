@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { OPERATOR, SITE } from '../data/facility';
+import { SITE } from '../data/facility';
 ---
 
 <BaseLayout title="プライバシーポリシー">
@@ -12,7 +12,7 @@ import { OPERATOR, SITE } from '../data/facility';
   <div class="container prose">
     <!-- TODO: 運営者(町/指定管理者)の既存ポリシーがあればそれに合わせる。アクセス解析を入れる場合は利用ツール名を明記 -->
     <p class="muted">【ひな形】運営者の正式な文面に差し替えてください。</p>
-    <p>{SITE.name}(運営:{OPERATOR.value})は、お問い合わせ等でお預かりした個人情報を、ご本人への回答・連絡の目的にのみ利用し、法令に基づく場合を除き第三者に提供しません。</p>
+    <p>{SITE.name}は、お問い合わせ等でお預かりした個人情報を、ご本人への回答・連絡の目的にのみ利用し、法令に基づく場合を除き第三者に提供しません。</p>
     <h2>アクセス解析について</h2>
     <p>当サイトでは、サービス向上のためにアクセス解析ツールを利用する場合があります。収集されるデータは匿名で、個人を特定するものではありません。</p>
   </div>

@@ -84,7 +84,6 @@ Cursor は `AGENTS.md` と `.cursor/rules/` を自動で読み込む。プロジ
 
 - OGP 画像なし(`public/og.png` を作ったら BaseLayout の TODO を解消)
 - お問い合わせフォームの送信先未定(`PUBLIC_FORM_ENDPOINT`)
-- 英語ページは最小限。料金・時間の一部を直書きしているので、Phase 3 で facility.ts から引くように
 - 「これからのイベント」はビルド時点で判定するため、毎日の再ビルド(GitHub Actions cron 等)が必要
 - 祝日の振替休館は自動判定していない(`calendar-overrides.json` に手入力)
 - プライバシーポリシーはひな形。運営者の正式文面に差し替える
