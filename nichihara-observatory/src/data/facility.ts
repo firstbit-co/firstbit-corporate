@@ -88,6 +88,11 @@ export const OPERATOR = {
 export const CALENDAR_URL =
   'https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FTokyo&src=bmljaGloYXJhb2JzQGdtYWlsLmNvbQ&src=OGZoM2d1Z3FyMThxcTV1ODQxcDY1ZmdpczhAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=aHQzamxmYWFjNWxmZDYyNjN1bGZoNHRxbDhAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=amEuamFwYW5lc2UjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039BE5&color=%23616161&color=%23E4C441&color=%23D50000';
 
+/** Google マップ(API キー不要の埋め込み)。正確な座標が取れたら q を緯度経度に替える */
+export const MAP_QUERY = '日原天文台 島根県津和野町';
+export const MAP_EMBED_URL = `https://maps.google.com/maps?q=${encodeURIComponent(MAP_QUERY)}&z=14&output=embed`;
+export const MAP_LINK_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAP_QUERY)}`;
+
 /** 宿泊施設(料金・予約は宙辺のサイト。天文台への入館とは別) */
 export const SORABE_URL = 'https://sorabe.jp/';
 
@@ -118,6 +123,7 @@ export const HISTORY: { year: string; text: Fact<string> }[] = [
 ];
 
 export const NAV = [
+  { href: '/about/', label: '天文台について' },
   { href: '/guide/', label: '利用案内' },
   { href: '/facilities/', label: '施設' },
   { href: '/access/', label: 'アクセス' },

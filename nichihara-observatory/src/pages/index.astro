@@ -5,7 +5,7 @@
  * 時間・料金・休館日・受付・予約は facility.ts から差し込むので、変えるときはそちらを直す。
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { CALENDAR_URL, CLOSED, FEES, HOURS, RECEPTION, SORABE_URL, range, yen } from '../data/facility';
+import { CALENDAR_URL, CLOSED, FEES, HOURS, MAP_EMBED_URL, MAP_LINK_URL, RECEPTION, SORABE_URL, range, yen } from '../data/facility';
 ---
 
 <BaseLayout>
@@ -44,16 +44,6 @@ import { CALENDAR_URL, CLOSED, FEES, HOURS, RECEPTION, SORABE_URL, range, yen } 
     <p class="facts-source">開館時間は変わることがあります。料金は変わりません。</p>
   </section>
 
-  <section class="section story" id="story">
-    <div class="wrap story-copy">
-      <h2>枕瀬山の天文台</h2>
-      <p>1985年、津和野町の枕瀬山に日原天文台が開館しました。山の上から夜空を見るための場所です。</p>
-      <p>主望遠鏡の口径は75cmです。夜は、スタッフが望遠鏡を向け、来館者がのぞきます。どの星が見えるかは、季節と月と雲で変わります。</p>
-      <p>昼は、建物の中を歩きます。晴れていて太陽が高い時間には、太陽を見ることがあります。同じ敷地に、星と森の科学館と{RECEPTION.place}（{RECEPTION.placeAlias}）があります。受付は資料館です。</p>
-      <p><a href="/facilities/">施設の案内を見る</a></p>
-      <img class="mascot-spot" src="/images/nichiharan-scope.jpg" alt="にちはらん" width="338" height="314">
-    </div>
-  </section>
 
   <section class="section" id="flow">
     <div class="wrap">
@@ -101,7 +91,17 @@ import { CALENDAR_URL, CLOSED, FEES, HOURS, RECEPTION, SORABE_URL, range, yen } 
 
   <section class="section" id="more">
     <div class="wrap">
-      <p><a href="/gallery/">写真</a>、<a href="/learn/">学習資料</a>、<a href="/friends/">友の会</a></p>
+      <p><a href="/about/">天文台について</a>、<a href="/gallery/">写真</a>、<a href="/learn/">学習資料</a>、<a href="/friends/">友の会</a></p>
+    </div>
+  </section>
+
+  <section class="section" id="map">
+    <div class="wrap">
+      <h2>地図</h2>
+      <div class="map-frame">
+        <iframe title="日原天文台の地図" src={MAP_EMBED_URL} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <p><a href={MAP_LINK_URL}>Googleマップで開く</a></p>
     </div>
   </section>
 </BaseLayout>

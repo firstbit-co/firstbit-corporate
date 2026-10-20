@@ -1,0 +1,23 @@
+---
+/** 天文台の紹介(もとはトップにあった「枕瀬山の天文台」の文章) */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { RECEPTION } from '../data/facility';
+---
+
+<BaseLayout title="天文台について" description="1985年に津和野町の枕瀬山に開館した日原天文台の紹介です。">
+  <header class="page-header">
+    <div class="container">
+      <h1>枕瀬山の天文台</h1>
+    </div>
+  </header>
+
+  <section class="section story" id="story">
+    <div class="wrap story-copy">
+      <p>1985年、津和野町の枕瀬山に日原天文台が開館しました。山の上から夜空を見るための場所です。</p>
+      <p>主望遠鏡の口径は75cmです。夜は、スタッフが望遠鏡を向け、来館者がのぞきます。どの星が見えるかは、季節と月と雲で変わります。</p>
+      <p>昼は、建物の中を歩きます。晴れていて太陽が高い時間には、太陽を見ることがあります。同じ敷地に、星と森の科学館と{RECEPTION.place}（{RECEPTION.placeAlias}）があります。受付は資料館です。</p>
+      <p><a href="/facilities/">施設の案内を見る</a></p>
+      <img class="mascot-spot" src="/images/nichiharan-scope.jpg" alt="にちはらん" width="338" height="314">
+    </div>
+  </section>
+</BaseLayout>

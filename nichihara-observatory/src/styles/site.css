@@ -232,6 +232,26 @@
 }
 
 #more {
+  padding-bottom: 0;
+}
+
+/* 地図(Google マップの埋め込み) */
+.map-frame {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--color-bg-raised);
+}
+.map-frame iframe {
+  display: block;
+  width: 100%;
+  height: 420px;
+  border: 0;
+}
+:root[data-theme='red'] .map-frame iframe {
+  filter: grayscale(1) sepia(1) hue-rotate(-50deg) saturate(4) brightness(0.6);
+}
+#map {
   padding-bottom: var(--space-4);
 }
 
