@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Verify from '../components/Verify.astro';
+import { ACCESS, CONTACT, SITE } from '../data/facility';
+
+const mapQuery = CONTACT.geo.value
+  ? `${CONTACT.geo.value.lat},${CONTACT.geo.value.lng}`
+  : `${SITE.name} ${CONTACT.address.value}`;
+const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`;
+---
+
+<BaseLayout title="アクセス" description="日原天文台へのアクセス(JR山口線日原駅から、お車でのルート、道路状況)。">
+  <header class="page-header">
+    <div class="container">
+      <h1>アクセス</h1>
+      <p><Verify fact={ACCESS.location} /></p>
+    </div>
+  </header>
+
+  <div class="container prose">
+    <h2>住所</h2>
+    <p><Verify fact={CONTACT.address} /></p>
+    <p><a class="button button--ghost" href={mapUrl} rel="noopener" target="_blank">Googleマップで開く</a></p>
+    <!-- TODO: 埋め込み地図を入れる場合はクリックで読み込む形式にする(初期表示の軽量化とプライバシーのため) -->
+
+    <h2>電車・タクシー</h2>
+    <p><Verify fact={ACCESS.train} /></p>
+    <!-- TODO(取材): 日原駅のタクシー事情(常駐の有無・予約先)を確認して案内を追加 -->
+
+    <h2>お車</h2>
+    <p><Verify fact={ACCESS.car} /></p>
+    <p>山道のため、夜間は特に運転にご注意ください。</p>
+    <!-- TODO(取材): 駐車台数、大型バスの可否、津和野・益田・山口方面からの所要時間 -->
+  </div>
+</BaseLayout>

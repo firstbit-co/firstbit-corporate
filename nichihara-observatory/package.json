@@ -1,0 +1,23 @@
+{
+  "name": "nichihara-observatory",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "日原天文台 公式サイト リニューアル(Cursor 引き継ぎ用スターター)",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "node --test \"tests/**/*.test.ts\"",
+    "check:copy": "node scripts/check-copy.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.4.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "typescript": "^5.9.3"
+  }
+}

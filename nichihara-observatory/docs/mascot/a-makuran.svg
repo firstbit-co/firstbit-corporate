@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 260" role="img" aria-labelledby="t">
+  <title id="t">マクラン(夜のすがた)</title>
+  <defs>
+    <linearGradient id="dome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cfd8e8"/>
+    </linearGradient>
+  </defs>
+  <g stroke="#2b3550" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+    <!-- 足 -->
+    <ellipse cx="92" cy="232" rx="20" ry="11" fill="#cfd8e8"/>
+    <ellipse cx="148" cy="232" rx="20" ry="11" fill="#cfd8e8"/>
+    <!-- ドラム(顔) -->
+    <rect x="48" y="112" width="144" height="112" rx="22" fill="#f4f6fb"/>
+    <!-- ドーム(頭) -->
+    <path d="M44 120 A76 76 0 0 1 196 120 Z" fill="url(#dome)"/>
+    <!-- スリット:夜は開いて星がのぞく -->
+    <rect x="109" y="46" width="22" height="74" rx="11" fill="#141c38"/>
+  </g>
+  <path d="M120 62 l3.5 7.5 8 .8 -6 5.4 1.8 8 -7.3 -4.2 -7.3 4.2 1.8 -8 -6 -5.4 8 -.8z" fill="#ffd45c"/>
+  <circle cx="114" cy="98" r="2" fill="#fff"/><circle cx="125" cy="108" r="1.6" fill="#fff"/>
+  <!-- 顔 -->
+  <ellipse cx="94" cy="150" rx="11" ry="13" fill="#2b3550"/>
+  <ellipse cx="146" cy="150" rx="11" ry="13" fill="#2b3550"/>
+  <circle cx="98" cy="145" r="4" fill="#fff"/><circle cx="150" cy="145" r="4" fill="#fff"/>
+  <circle cx="91" cy="155" r="1.8" fill="#fff"/><circle cx="143" cy="155" r="1.8" fill="#fff"/>
+  <circle cx="74" cy="170" r="9" fill="#ffb3c1" opacity=".8"/>
+  <circle cx="166" cy="170" r="9" fill="#ffb3c1" opacity=".8"/>
+  <path d="M110 168 q10 10 20 0" fill="none" stroke="#2b3550" stroke-width="4" stroke-linecap="round"/>
+  <!-- 枕(枕瀬山の「まくら」) -->
+  <g stroke="#2b3550" stroke-width="4" stroke-linejoin="round">
+    <rect x="62" y="182" width="116" height="44" rx="20" fill="#ffe9a8"/>
+    <ellipse cx="62" cy="200" rx="13" ry="11" fill="#f4f6fb"/>
+    <ellipse cx="178" cy="200" rx="13" ry="11" fill="#f4f6fb"/>
+  </g>
+  <g fill="#f5b942">
+    <path d="M98 196 l2.5 5 5.5 .6 -4 3.8 1.2 5.4 -5.2 -3 -5.2 3 1.2 -5.4 -4 -3.8 5.5 -.6z"/>
+    <path d="M140 200 l2 4 4.4 .5 -3.2 3 1 4.4 -4.2 -2.4 -4.2 2.4 1 -4.4 -3.2 -3 4.4 -.5z"/>
+    <circle cx="120" cy="212" r="3"/>
+  </g>
+</svg>

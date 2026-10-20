@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate, getEvents } from '../../lib/content';
+
+const all = await getEvents();
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+const upcoming = all.filter((e) => e.data.date >= today);
+const past = all.filter((e) => e.data.date < today).reverse();
+---
+
+<BaseLayout title="イベント" description="日原天文台の観望会・天文現象・季節イベントのご案内。">
+  <header class="page-header">
+    <div class="container">
+      <h1>イベント</h1>
+      <p>特別観望会や天文現象にあわせたイベントのご案内です。</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>開催予定</h2>
+    {
+      upcoming.length ? (
+        <ul class="list">
+          {upcoming.map((e) => (
+            <li>
+              <time datetime={e.data.date.toISOString()}>{formatDate(e.data.date)}</time>
+              <span class="tag">{e.data.category}</span>
+              <a href={`/events/${e.id}/`}>{e.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="muted">現在予定されているイベントはありません。</p>
+      )
+    }
+
+    {
+      past.length > 0 && (
+        <>
+          <h2>過去のイベント</h2>
+          <ul class="list">
+            {past.map((e) => (
+              <li>
+                <time datetime={e.data.date.toISOString()}>{formatDate(e.data.date)}</time>
+                <a href={`/events/${e.id}/`}>{e.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )
+    }
+  </div>
+</BaseLayout>

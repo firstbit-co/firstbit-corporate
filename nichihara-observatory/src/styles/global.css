@@ -1,0 +1,287 @@
+/*
+ * デザイントークン。色・余白・フォントは必ずここの変数を使う(直書き禁止)。
+ * 既定は夜空をイメージしたダークテーマ。
+ * [data-theme="red"] は観望現場で目の暗順応を妨げない「赤色ナイトモード」。
+ */
+:root {
+  --color-bg: #0b1020;
+  --color-bg-raised: #131a30;
+  --color-bg-sunken: #070a15;
+  --color-border: #2a3454;
+  --color-text: #e8ecf5;
+  --color-text-muted: #a9b3c9;
+  --color-accent: #f5c46b;
+  --color-accent-strong: #ffd98f;
+  --color-link: #9cc4ff;
+  --color-ok: #7fd6a4;
+  --color-warn: #f5c46b;
+  --color-ng: #ff9a9a;
+  --color-verify-bg: #5a1d6b;
+  --color-verify-text: #ffe1ff;
+
+  --font-sans: 'Noto Sans JP', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic UI', Meiryo, system-ui, sans-serif;
+  --font-serif: 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  --radius: 12px;
+  --content-width: 72rem;
+  --gutter: 16px;
+
+  color-scheme: dark;
+}
+
+:root[data-theme='red'] {
+  --color-bg: #0a0000;
+  --color-bg-raised: #1a0303;
+  --color-bg-sunken: #050000;
+  --color-border: #4a1010;
+  --color-text: #ff8a8a;
+  --color-text-muted: #d06060;
+  --color-accent: #ff6b6b;
+  --color-accent-strong: #ff9090;
+  --color-link: #ff9e9e;
+  --color-ok: #ff8a8a;
+  --color-warn: #ff8a8a;
+  --color-ng: #ff8a8a;
+}
+:root[data-theme='red'] img,
+:root[data-theme='red'] .starfield {
+  filter: grayscale(1) sepia(1) hue-rotate(-50deg) saturate(4) brightness(0.6);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--color-link);
+  text-underline-offset: 0.2em;
+}
+a:hover {
+  color: var(--color-accent-strong);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+h1 {
+  font-size: clamp(1.75rem, 1.2rem + 2.4vw, 2.75rem);
+}
+h2 {
+  font-size: clamp(1.35rem, 1.1rem + 1vw, 1.85rem);
+  margin-top: var(--space-12);
+}
+h3 {
+  font-size: 1.15rem;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-2);
+  top: -100px;
+  background: var(--color-accent);
+  color: #000;
+  padding: var(--space-2) var(--space-4);
+  z-index: 100;
+}
+.skip-link:focus {
+  top: var(--space-2);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.card {
+  background: var(--color-bg-raised);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-6);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: var(--space-2) var(--space-6);
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: #1a1200;
+  font-weight: 700;
+  text-decoration: none;
+}
+.button:hover {
+  background: var(--color-accent-strong);
+  color: #1a1200;
+}
+.button--ghost {
+  background: transparent;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th,
+.table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+}
+.table th {
+  color: var(--color-text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.table-wrap {
+  overflow-x: auto;
+}
+/* 狭い画面では行をカード状に縦積みする。td に data-label を付けて使う */
+@media (max-width: 600px) {
+  .table--stack thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  .table--stack tr {
+    display: block;
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .table--stack th,
+  .table--stack td {
+    display: block;
+    border: 0;
+    padding: var(--space-1) 0;
+    white-space: normal;
+  }
+  .table--stack th {
+    color: var(--color-text);
+    font-weight: 700;
+  }
+  .table--stack td[data-label]::before {
+    content: attr(data-label) '：';
+    color: var(--color-text-muted);
+  }
+}
+
+.muted {
+  color: var(--color-text-muted);
+}
+
+/* イベント・お知らせの一覧 */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+.list li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  align-items: baseline;
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+}
+.list time {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+.tag {
+  font-size: 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 0 var(--space-2);
+  color: var(--color-text-muted);
+}
+
+.page-header {
+  padding-block: var(--space-12) var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+.page-header p {
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+main {
+  padding-bottom: var(--space-16);
+}
+
+.prose {
+  max-width: 44rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

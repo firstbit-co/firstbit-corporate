@@ -1,0 +1,310 @@
+/*
+ * ページ部品のスタイル(トップの .stage / .facts / .story-copy / .mascot-spot / .visit-steps など)。
+ * 色・余白は global.css のトークンを使う。
+ */
+
+/* 共通の枠と区切り */
+.wrap {
+  width: 100%;
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.section {
+  padding-block: var(--space-16) 0;
+}
+.section h2 {
+  margin-top: 0;
+}
+.section-intro {
+  color: var(--color-text-muted);
+  margin-top: calc(-1 * var(--space-2));
+}
+
+/* ボタン(トップの確定稿のクラス名) */
+.button-gold {
+  background: var(--color-accent);
+  color: #1a1200;
+}
+.button-quiet {
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid color-mix(in srgb, var(--color-text) 45%, transparent);
+}
+.button-quiet:hover {
+  color: var(--color-accent-strong);
+  border-color: var(--color-accent-strong);
+}
+
+/* ステージ(トップの写真と見出し) */
+.stage {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: min(78vh, 720px);
+  display: grid;
+  align-items: end;
+  border-bottom: 1px solid var(--color-border);
+}
+.stage-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% center;
+  z-index: -2;
+}
+/* 文字を読みやすくするため、左下に向けて暗くする */
+.stage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(to top, var(--color-bg) 0%, color-mix(in srgb, var(--color-bg) 55%, transparent) 38%, transparent 70%),
+    linear-gradient(to right, color-mix(in srgb, var(--color-bg) 70%, transparent) 0%, transparent 60%);
+}
+.stage-copy {
+  width: 100%;
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding: var(--space-16) var(--gutter) var(--space-16);
+}
+.stage-copy > p:not(.stage-lead):not(.stage-caption) {
+  max-width: 30rem;
+}
+.stage h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 1.6rem + 4vw, 4.5rem);
+  letter-spacing: 0.12em;
+  margin: 0;
+}
+.stage-lead {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 1rem + 1.2vw, 1.75rem);
+  color: var(--color-accent);
+  margin: var(--space-2) 0 var(--space-4);
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+.stage-caption {
+  margin: var(--space-8) 0 0;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+/* 来館の要点(4項目) */
+.facts {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: calc(-1 * var(--space-8)) auto 0;
+  padding-inline: var(--gutter);
+  position: relative;
+}
+.facts ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  background: var(--color-bg-raised);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+.facts li {
+  padding: var(--space-6);
+}
+.facts li + li {
+  border-left: 1px solid var(--color-border);
+}
+.facts p {
+  margin: 0;
+}
+.facts-label {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.08em;
+}
+.facts-value {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-block: var(--space-1) var(--space-2) !important;
+  line-height: 1.5;
+}
+.facts-value a {
+  color: var(--color-text);
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 2px;
+}
+.facts-note {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+.facts-source {
+  margin: var(--space-3) 0 0;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* 天文台の紹介文と、小さく置くマスコット */
+.story-copy {
+  display: grid;
+  grid-template-columns: minmax(0, 40rem) 1fr;
+  column-gap: var(--space-12);
+}
+.story-copy > * {
+  grid-column: 1;
+}
+.story-copy > .mascot-spot {
+  grid-column: 2;
+  grid-row: 1 / span 6;
+  align-self: center;
+  justify-self: center;
+}
+.mascot-spot {
+  display: block;
+  width: clamp(112px, 18vw, 168px);
+  height: auto;
+  border-radius: 24px;
+  margin: var(--space-6) 0 0 auto;
+}
+.story-copy > .mascot-spot {
+  margin: 0;
+}
+
+/* 来館の流れ(3ステップ) */
+.visit-steps {
+  list-style: none;
+  counter-reset: step;
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+.visit-steps li {
+  counter-increment: step;
+  background: var(--color-bg-raised);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-6);
+}
+.visit-steps li::before {
+  content: counter(step);
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #1a1200;
+  font-weight: 700;
+}
+.visit-steps h3 {
+  margin: var(--space-3) 0 var(--space-2);
+}
+.visit-steps p {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+/* 予定(Google カレンダーの埋め込み) */
+.calendar-frame {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #fff;
+}
+.calendar-frame iframe {
+  display: block;
+  width: 100%;
+  height: 600px;
+  border: 0;
+}
+:root[data-theme='red'] .calendar-frame iframe {
+  filter: grayscale(1) sepia(1) hue-rotate(-50deg) saturate(4) brightness(0.6);
+}
+
+#more {
+  padding-bottom: 0;
+}
+
+/* 地図(Google マップの埋め込み) */
+.map-frame {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--color-bg-raised);
+}
+.map-frame iframe {
+  display: block;
+  width: 100%;
+  height: 420px;
+  border: 0;
+}
+:root[data-theme='red'] .map-frame iframe {
+  filter: grayscale(1) sepia(1) hue-rotate(-50deg) saturate(4) brightness(0.6);
+}
+#map {
+  padding-bottom: var(--space-4);
+}
+
+@media (max-width: 860px) {
+  .facts ul {
+    grid-template-columns: 1fr;
+  }
+  .facts li + li {
+    border-left: 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .story-copy {
+    grid-template-columns: 1fr;
+  }
+  .story-copy > .mascot-spot {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: end;
+    margin-top: var(--space-4);
+  }
+  .visit-steps {
+    grid-template-columns: 1fr;
+  }
+  .calendar-frame iframe {
+    height: 480px;
+  }
+}
+
+/* 狭い画面では写真を上部にまとめ、文字はその下に置く(ドームと見出しが重ならないように) */
+@media (max-width: 600px) {
+  .stage {
+    min-height: 0;
+    align-items: start;
+  }
+  .stage-bg {
+    height: 300px;
+    bottom: auto;
+    object-position: 72% 60%;
+  }
+  .stage::after {
+    background: linear-gradient(to bottom, transparent 0, transparent 200px, var(--color-bg) 300px);
+  }
+  .stage-copy {
+    padding-top: 264px;
+    padding-bottom: var(--space-12);
+  }
+}
+
+@media (max-width: 420px) {
+  .facts li {
+    padding: var(--space-4);
+  }
+  .facts-value {
+    font-size: 1.15rem;
+  }
+}
