@@ -1,0 +1,52 @@
+# 専用リポジトリに切り出した後に使う GitHub Pages への公開(firstbit-corporate 内では動かない)
+# 事前設定: Settings → Pages → Source を「GitHub Actions」に。
+#           Settings → Secrets and variables → Actions → Variables に
+#           SITE_URL(例 https://nichihara-obs.jp)と PUBLIC_ALLOW_INDEX(本公開で true、それまでは false)
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  # 「これからのイベント」の鮮度を保つため毎朝 6:00 JST に再公開
+  schedule:
+    - cron: '0 21 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      SITE_URL: ${{ vars.SITE_URL }}
+      PUBLIC_ALLOW_INDEX: ${{ vars.PUBLIC_ALLOW_INDEX || 'false' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - run: npm run check:copy
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

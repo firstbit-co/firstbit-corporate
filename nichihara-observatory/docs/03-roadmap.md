@@ -27,7 +27,7 @@
 - [ ] 写真の組み込み(Astro の `<Image>` で WebP 自動変換)、OGP 画像(1200×630)
 - [ ] お問い合わせフォームの送信先決定(Formspree / Google フォーム等)
 - [ ] アクセス解析(Cloudflare Web Analytics なら Cookie 不要)
-- [ ] 公開: `PUBLIC_ALLOW_INDEX=true`、`SITE_URL` 設定、`public/robots.txt` を公開用に
+- [ ] 公開: `PUBLIC_ALLOW_INDEX=true`、`SITE_URL` 設定(robots.txt は自動で切り替わる)。公開は `.github/workflows/deploy.yml`
 - [ ] **旧サイトからの誘導**: sun-net.jp 側のトップに「新しいサイトはこちら」+ meta refresh を置いてもらう
 - [ ] Google Search Console・Bing Webmaster 登録、Googleビジネスプロフィールの URL 更新
 - [ ] 観光サイト各所(しまね観光ナビ、津和野観光、JRおでかけネット等)に新 URL と正しい情報で修正依頼

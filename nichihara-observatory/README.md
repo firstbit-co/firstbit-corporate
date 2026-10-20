@@ -89,6 +89,6 @@ npm run dev    # http://localhost:4321
 - [ ] プライバシーポリシーを正式文面に
 - [ ] お問い合わせ手段の確定(メール公開 or `PUBLIC_FORM_ENDPOINT`)
 - [ ] 独自ドメイン取得、`SITE_URL` と `src/data/facility.ts` の `SITE.url` を設定
-- [ ] `PUBLIC_ALLOW_INDEX=true`、`public/robots.txt` を公開用に差し替え
+- [ ] `PUBLIC_ALLOW_INDEX=true`(robots.txt と noindex はこの値で自動で切り替わる)
 - [ ] 旧サイト(sun-net.jp)に新サイトへの案内を設置
 - [ ] Search Console 登録、観光サイト各所へ URL・情報の修正依頼
