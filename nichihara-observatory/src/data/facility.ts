@@ -107,26 +107,56 @@ export const ACCESS = {
   location: { value: '津和野川と高津川の合流点を見下ろす枕瀬山(標高約255m)の山頂', verified: false } satisfies Fact<string>,
 };
 
+/** 75cm望遠鏡の仕様(新田さん作成の「天文台について」原稿、2026-10-20) */
 export const TELESCOPE = {
   aperture: '75cm',
-  type: {
-    value: '反射望遠鏡(経緯台式架台・ナスミス焦点)',
-    verified: true,
-    note: '株式会社First bit の提案資料(企業版ふるさと納税)の記載',
-  } satisfies Fact<string>,
+  specs: [
+    ['種類', '反射望遠鏡(カセグレン／ナスミス式)'],
+    ['口径(鏡の直径)', '75cm'],
+    ['焦点距離', '約9m(F12)'],
+    ['架台', 'コンピューター制御の経緯台'],
+    ['製作', '法月技研(静岡県焼津市)、1985年'],
+    ['指導', '天文学者・磯部琇三(当時 東京大学東京天文台)'],
+  ] as [string, string][],
 };
 
-/** あゆみ。本番ビルドでは verified の項目だけ表示する(facilities.astro) */
+/**
+ * あゆみ(同原稿の年表)。verified: false は原稿で「要確認」の項目で、本番ビルドでは出さない。
+ * 開台は日付が確定するまで「1985年8月」までにする。
+ */
 export const HISTORY: { year: string; text: Fact<string> }[] = [
-  { year: '1985', text: { value: '津和野町の枕瀬山に日原天文台が開館', verified: true } },
-  { year: '1994', text: { value: '星と森の科学館が開館', verified: false, note: '7月7日開館との掲載あり' } },
+  { year: '1982年', text: { value: '枕瀬山森林公園が完成', verified: true } },
+  { year: '1985年', text: { value: '日原天文台が開台。口径75cm望遠鏡を公開', verified: true } },
+  { year: '1986年', text: { value: 'ペンション北斗星が開業', verified: true } },
+  { year: '1989年', text: { value: '天文展示館「ポランの広場」が完成', verified: true } },
+  { year: '1994年', text: { value: '「星と森の科学館」が完成', verified: true } },
+  { year: '2005年', text: { value: '日原町が津和野町と合併し、津和野町立に', verified: true } },
+  { year: '2007〜2010年度', text: { value: '環境省「全国星空継続観察」で4年連続上位3位以内(2009年度は1位)', verified: true } },
+  { year: '2008年', text: { value: '「星空の街・あおぞらの街」全国協議会会長賞「天の川賞」(団体)を受賞', verified: false, note: '環境省の発表資料で確認してから公開' } },
+  { year: '2024年', text: { value: 'スマート天体望遠鏡を導入', verified: true } },
+  { year: '2025年', text: { value: '開台40周年。古川聡宇宙飛行士の記念講演会', verified: true } },
+  { year: '2025年', text: { value: '旧ペンション北斗星が宿泊施設「宙辺 -SORABE-」としてリニューアル(7月7日)', verified: true } },
 ];
+
+/** 宿泊施設 宙辺 -SORABE-(株式会社First bit の資料より) */
+export const SORABE = {
+  name: '宙辺 -SORABE-',
+  kana: 'そらべ',
+  formerName: 'ペンション北斗星',
+  renewed: '令和7年7月7日',
+  meaning: '「宇宙のほとり」という意味の造語',
+  naming: '津和野町の公募で、350通を超える応募の中から選ばれた名前',
+  style: '1棟貸し(何人で泊まっても料金は同じ)',
+  beds: 'セミダブルベッド11台・ダブルベッド3台',
+  floors: '地上1階・地下1階',
+};
 
 export const NAV = [
   { href: '/about/', label: '天文台について' },
   { href: '/guide/', label: '利用案内' },
   { href: '/facilities/', label: '施設' },
   { href: '/access/', label: 'アクセス' },
+  { href: '/sorabe/', label: '宿泊' },
   { href: '/around/', label: '周辺' },
   { href: '/news/', label: 'お知らせ' },
   { href: '/contact/', label: 'お問い合わせ' },

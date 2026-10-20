@@ -21,12 +21,7 @@ const history = HISTORY.filter((h) => import.meta.env.DEV || h.text.verified);
       <!-- TODO(写真): ドームと主望遠鏡の写真を public/images/ に置いて表示 -->
       <p>主望遠鏡の口径は{TELESCOPE.aperture}です。夜は、スタッフが望遠鏡を向け、来館者がのぞきます。どの星が見えるかは、季節と月と雲で変わります。</p>
       <p>昼は、建物の中を歩きます。晴れていて太陽が高い時間には、太陽を見ることがあります。</p>
-      <table class="table">
-        <tbody>
-          <tr><th scope="row">口径</th><td>{TELESCOPE.aperture}</td></tr>
-          <tr><th scope="row">形式</th><td><Verify fact={TELESCOPE.type} /></td></tr>
-        </tbody>
-      </table>
+      <p><a href="/about/#telescope">75cm望遠鏡のくわしい仕様</a></p>
     </section>
 
     <section id="museum">
@@ -46,6 +41,7 @@ const history = HISTORY.filter((h) => import.meta.env.DEV || h.text.verified);
       <ol class="timeline">
         {history.map((h) => <li><span class="timeline__year">{h.year}</span><Verify fact={h.text} /></li>)}
       </ol>
+      <p><a href="/about/#history">日原天文台の歴史</a></p>
     </section>
   </div>
 </BaseLayout>
