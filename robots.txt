@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /tools/
 
 Sitemap: https://firstbit-co.github.io/firstbit-corporate/sitemap.xml
