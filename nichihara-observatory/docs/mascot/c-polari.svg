@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 260" role="img" aria-labelledby="t">
+  <title id="t">ポラリ(願い星の郵便屋さん)</title>
+  <g stroke="#2b3550" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+    <!-- かばんのひも -->
+    <path d="M84 98 L184 170" fill="none" stroke="#8a5a2b" stroke-width="7"/>
+    <!-- 星のからだ -->
+    <path d="M120 40 L146 100 L210 106 L162 148 L176 212 L120 180 L64 212 L78 148 L30 106 L94 100 Z" fill="#ffd45c"/>
+    <!-- 郵便帽 -->
+    <path d="M90 66 Q120 40 150 66 L150 80 L90 80 Z" fill="#1f3a8a"/>
+    <path d="M84 80 L160 80 Q164 88 156 90 L88 90 Q80 88 84 80 Z" fill="#14285e"/>
+    <!-- かばん -->
+    <rect x="168" y="150" width="54" height="42" rx="8" fill="#b9793d"/>
+    <path d="M168 164 h54" fill="none"/>
+    <!-- 手紙 -->
+    <rect x="178" y="134" width="34" height="24" rx="3" fill="#ffffff" transform="rotate(-12 195 146)"/>
+  </g>
+  <path d="M120 62 l2.5 5 5.5 .6 -4 3.8 1.2 5.4 -5.2 -3 -5.2 3 1.2 -5.4 -4 -3.8 5.5 -.6z" fill="#ffd45c"/>
+  <path d="M181 137 l14 10 14 -14" fill="none" stroke="#e8505b" stroke-width="3" stroke-linejoin="round" transform="rotate(-12 195 146)"/>
+  <!-- 顔 -->
+  <ellipse cx="104" cy="122" rx="8.5" ry="10.5" fill="#2b3550"/>
+  <ellipse cx="136" cy="122" rx="8.5" ry="10.5" fill="#2b3550"/>
+  <circle cx="107" cy="118" r="3.2" fill="#fff"/><circle cx="139" cy="118" r="3.2" fill="#fff"/>
+  <circle cx="88" cy="140" r="8" fill="#ff9aa8" opacity=".7"/>
+  <circle cx="152" cy="140" r="8" fill="#ff9aa8" opacity=".7"/>
+  <path d="M110 140 q10 10 20 0" fill="none" stroke="#2b3550" stroke-width="4" stroke-linecap="round"/>
+  <!-- 足 -->
+  <g stroke="#2b3550" stroke-width="4" fill="#1f3a8a">
+    <ellipse cx="64" cy="216" rx="15" ry="9"/>
+    <ellipse cx="176" cy="216" rx="15" ry="9"/>
+  </g>
+</svg>

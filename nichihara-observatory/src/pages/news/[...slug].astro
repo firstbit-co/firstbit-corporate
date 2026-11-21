@@ -1,0 +1,29 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate, getNews } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const news = await getNews();
+  return news.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={entry.data.title}>
+  <header class="page-header">
+    <div class="container">
+      <p>
+        <time datetime={entry.data.date.toISOString()}>{formatDate(entry.data.date)}</time>
+        <span class="tag">{entry.data.category}</span>
+      </p>
+      <h1>{entry.data.title}</h1>
+    </div>
+  </header>
+  <div class="container prose">
+    <Content />
+    <p><a href="/news/">お知らせ一覧へ戻る</a></p>
+  </div>
+</BaseLayout>

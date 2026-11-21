@@ -1,0 +1,52 @@
+---
+/**
+ * 施設の案内。天文台の説明とあゆみは「天文台について」(/about/)にまとめたので、ここでは敷地内の施設を案内する。
+ * TODO(写真): 旧サイト(sun-net.jp)の写真は、この環境から取得できなかった。使ってよい写真を public/images/ に置いて追加する
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { PARK_FACILITIES } from '../data/facility';
+
+const { museum, archive, forest25, tennis } = PARK_FACILITIES;
+---
+
+<BaseLayout title="施設の案内" description="星と森の科学館、天文資料館(ポランの広場)、25世紀の森、テニスコートの案内です。">
+  <header class="page-header">
+    <div class="container">
+      <h1>施設の案内</h1>
+      <p>天文台のある枕瀬山の敷地には、次の施設があります。</p>
+    </div>
+  </header>
+
+  <div class="container prose">
+    <section id="museum">
+      <h2>{museum.name}</h2>
+      {museum.text.map((t) => <p>{t}</p>)}
+      <h3>利用料</h3>
+      <table class="table">
+        <tbody>{museum.fees.map(([k, v]) => <tr><th scope="row">{k}</th><td>{v}</td></tr>)}</tbody>
+      </table>
+      <p class="muted">{museum.feeNote}</p>
+    </section>
+
+    <section id="archive">
+      <h2>{archive.name}</h2>
+      {archive.text.map((t) => <p>{t}</p>)}
+      <h3>利用料</h3>
+      <p>{archive.feeNote}</p>
+    </section>
+
+    <section id="forest">
+      <h2>{forest25.name}</h2>
+      <p class="muted">くわしい案内は準備中です。</p>
+      <!-- TODO(取材): 25世紀の森の内容・利用方法・利用料。検索では情報が見つからなかった -->
+    </section>
+
+    <section id="tennis">
+      <h2>{tennis.name}</h2>
+      <p class="muted">くわしい案内は準備中です。</p>
+      <!-- TODO(取材): 面数・利用時間・利用料・申込先 -->
+    </section>
+
+    <p><a href="/about/">天文台について(歴史と75cm望遠鏡)</a></p>
+  </div>
+</BaseLayout>

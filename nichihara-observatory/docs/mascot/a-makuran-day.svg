@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 260" role="img" aria-labelledby="t">
+  <title id="t">マクラン(昼のすがた・おねむ)</title>
+  <defs>
+    <linearGradient id="dome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cfd8e8"/>
+    </linearGradient>
+  </defs>
+  <g stroke="#2b3550" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+    <ellipse cx="92" cy="232" rx="20" ry="11" fill="#cfd8e8"/>
+    <ellipse cx="148" cy="232" rx="20" ry="11" fill="#cfd8e8"/>
+    <rect x="48" y="112" width="144" height="112" rx="22" fill="#f4f6fb"/>
+    <path d="M44 120 A76 76 0 0 1 196 120 Z" fill="url(#dome)"/>
+    <!-- 昼はスリットが閉じている -->
+    <line x1="120" y1="48" x2="120" y2="118" stroke-width="3" opacity=".5"/>
+    <!-- ねむり目 -->
+    <path d="M82 152 q12 9 24 0" fill="none"/>
+    <path d="M134 152 q12 9 24 0" fill="none"/>
+    <path d="M113 172 q7 5 14 0" fill="none"/>
+  </g>
+  <circle cx="74" cy="170" r="9" fill="#ffb3c1" opacity=".8"/>
+  <circle cx="166" cy="170" r="9" fill="#ffb3c1" opacity=".8"/>
+  <g stroke="#2b3550" stroke-width="4" stroke-linejoin="round">
+    <rect x="62" y="182" width="116" height="44" rx="20" fill="#ffe9a8"/>
+    <ellipse cx="62" cy="200" rx="13" ry="11" fill="#f4f6fb"/>
+    <ellipse cx="178" cy="200" rx="13" ry="11" fill="#f4f6fb"/>
+  </g>
+  <g fill="#f5b942">
+    <path d="M98 196 l2.5 5 5.5 .6 -4 3.8 1.2 5.4 -5.2 -3 -5.2 3 1.2 -5.4 -4 -3.8 5.5 -.6z"/>
+    <path d="M140 200 l2 4 4.4 .5 -3.2 3 1 4.4 -4.2 -2.4 -4.2 2.4 1 -4.4 -3.2 -3 4.4 -.5z"/>
+  </g>
+  <g fill="#7f8bb0" font-family="sans-serif" font-weight="700">
+    <text x="196" y="74" font-size="22">Z</text>
+    <text x="212" y="52" font-size="16">z</text>
+    <text x="224" y="36" font-size="12">z</text>
+  </g>
+</svg>

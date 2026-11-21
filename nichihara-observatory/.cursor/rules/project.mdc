@@ -1,0 +1,10 @@
+---
+description: 日原天文台サイトの基本ルール(常に適用)
+alwaysApply: true
+---
+
+- プロジェクト規約の本体は `AGENTS.md`。作業前に読むこと。背景資料は `docs/`。
+- 施設の事実(料金・時間・住所・仕様・沿革)は推測で書かない。`src/data/facility.ts` の `Fact` に入れ、未確認は `verified: false`、表示は `<Verify fact={...} />`。
+- スタイルは `src/styles/global.css` の CSS 変数を使う。赤色ナイトモードでも読めること。
+- 変更後に `npm test && npm run check && npm run build` を通す。
+- 返答・コメント・コミットメッセージは日本語。

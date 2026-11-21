@@ -1,0 +1,11 @@
+---
+description: イベント・お知らせ記事を書くとき
+globs: src/content/**/*.md
+alwaysApply: false
+---
+
+- frontmatter は `src/content.config.ts` のスキーマに合わせる(events: title/date/category/summary 必須、news: title/date/category 必須)。
+- ファイル名は `YYYY-MM-英数字スラッグ.md`。
+- 天文現象の日時は国立天文台 暦計算室などの一次情報で確認し、本文に出典を残す。
+- 文体はです・ます調。子どもにも読める言葉を選び、専門用語には短い説明を添える。
+- 料金・時間がいつもと同じなら「通常の観望料金」のように書き、金額を本文に重複させない(facility.ts と食い違うのを防ぐ)。

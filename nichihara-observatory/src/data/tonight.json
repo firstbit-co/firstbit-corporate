@@ -1,0 +1,7 @@
+{
+  "_comment": "今夜の観望会の開催状況。スタッフが当日夕方に更新する想定。Phase 2 で管理画面/CMS に移す(docs/03-roadmap.md)。status は scheduled | held | cancelled | undecided のいずれか",
+  "date": "2026-10-18",
+  "status": "undecided",
+  "message": "【サンプル表示】開催可否は当日夕方にこの欄でお知らせします。",
+  "updatedAt": "2026-10-18T15:00:00+09:00"
+}

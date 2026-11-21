@@ -1,0 +1,122 @@
+---
+/**
+ * 宿泊施設 宙辺 -SORABE- の紹介。宙辺のサイト(予約)へつなぐのが目的。
+ * 内容は株式会社First bit の資料(企業版ふるさと納税の提案書)より。
+ * 表記ルール:「隣の」「隣接」は使わない。料金と予約は宙辺のサイトで案内する(天文台への入館とは別)。
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { CAMP, SORABE, SORABE_URL } from '../data/facility';
+---
+
+<BaseLayout title="宙辺 -SORABE-" description="日原天文台のある枕瀬山の一帯に泊まる。1棟貸しの宿泊施設「宙辺 -SORABE-」と枕瀬山キャンプ場の案内です。">
+  <header class="page-header sorabe-hero">
+    <div class="container">
+      <p class="eyebrow">泊まって、星を見る</p>
+      <h1>{SORABE.name}</h1>
+      <p>日原天文台と同じ枕瀬山の一帯にある、1棟貸しの宿泊施設です。</p>
+      <p class="hero-actions"><a class="button button-gold" href={SORABE_URL}>宙辺のサイトで空室・料金を見る</a></p>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="prose" id="about">
+      <h2>宙辺(そらべ)とは</h2>
+      <p>宙辺は、{SORABE.formerName}を改装し、{SORABE.renewed}に新しく開いた宿泊施設です。</p>
+      <p>名前は{SORABE.meaning}です。泊まる人が、満天の星空を散歩するような時間を過ごせるように、という思いを込めています。{SORABE.naming}です。</p>
+      <p>同じ日原地域には「かわべ」という施設もあり、地域全体で楽しんでもらえるように、という願いも込められています。</p>
+    </section>
+
+    <section id="features">
+      <h2>宙辺の泊まり方</h2>
+      <ul class="sorabe-cards">
+        <li>
+          <h3>1棟まるごと貸し切り</h3>
+          <p>{SORABE.style}。家族や仲間、合宿での利用に向いています。</p>
+        </li>
+        <li>
+          <h3>大人数でも泊まれる</h3>
+          <p>{SORABE.beds}。{SORABE.floors}の建物です。</p>
+        </li>
+        <li>
+          <h3>天文台まで歩いてすぐ</h3>
+          <p>夜の天体観望のあとも、山を下りずにそのまま休めます。</p>
+        </li>
+      </ul>
+      <!-- TODO(写真): 外観・客室・夜の星空の写真を宙辺から受け取って掲載 -->
+      <!-- TODO(取材): 天文台からの距離(徒歩何分か)を確認して「歩いてすぐ」を具体的にする -->
+    </section>
+
+    <section class="prose" id="night">
+      <h2>星を見る夜のすごし方</h2>
+      <ol>
+        <li>夕方、宙辺にチェックイン</li>
+        <li>夜は日原天文台へ。資料館で受付をして、75cm望遠鏡で星をのぞく</li>
+        <li>宙辺に戻って、山の上の夜空をゆっくり眺める</li>
+      </ol>
+      <p class="muted">天文台の営業日・開館時間・料金は<a href="/guide/">利用案内</a>をご覧ください。天文台への入館は、宿泊とは別です。</p>
+    </section>
+
+    <section class="sorabe-cta" id="booking">
+      <h2>ご予約</h2>
+      <p>空室状況・料金・ご予約は、宙辺のサイトで確認してください。</p>
+      <p><a class="button button-gold" href={SORABE_URL}>宙辺 -SORABE- のサイトへ</a></p>
+    </section>
+
+    <section class="prose" id="camp">
+      <h2>{CAMP.name}</h2>
+      <p>テントやバンガローで泊まりたい方には、同じ枕瀬山の一帯にある{CAMP.name}もあります。</p>
+      <ul>
+        <li>営業期間:{CAMP.season}</li>
+        <li>主な設備:{CAMP.facilities}</li>
+      </ul>
+      <p>利用期間・料金・予約は、{CAMP.name}(<a href={`tel:${CAMP.tel.replaceAll('-', '')}`}>{CAMP.tel}</a>)で確認してください。</p>
+      <p><a href={CAMP.url}>しまね観光ナビ「{CAMP.name}」</a></p>
+      <!-- TODO(取材): 今年の営業期間・定休日・料金をキャンプ場に確認して載せる(掲載サイトごとに違う) -->
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .sorabe-hero {
+    background: radial-gradient(ellipse at 80% 0%, #1f2b57 0%, var(--color-bg) 70%);
+  }
+  .eyebrow {
+    color: var(--color-accent) !important;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+  .hero-actions {
+    margin-top: var(--space-6) !important;
+  }
+  .sorabe-cards {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    gap: var(--space-4);
+  }
+  .sorabe-cards li {
+    background: var(--color-bg-raised);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-6);
+  }
+  .sorabe-cards h3 {
+    margin-top: 0;
+  }
+  .sorabe-cards p {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+  .sorabe-cta {
+    margin-top: var(--space-12);
+    padding: var(--space-8);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius);
+    text-align: center;
+  }
+  .sorabe-cta h2 {
+    margin-top: 0;
+  }
+</style>

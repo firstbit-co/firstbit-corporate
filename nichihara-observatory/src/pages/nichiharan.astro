@@ -1,0 +1,111 @@
+---
+/**
+ * マスコット「にちはらん」の説明ページ。トップでは小さく置くだけにして、説明はここにまとめる。
+ * 画像の元データは docs/mascot/nichiharan.mjs(node で再生成 → public/images/nichiharan/ にコピー)。
+ * TODO: 町の公式キャラクターとして制定される前に公開する場合は「キャラクター案」と表記する。
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const poses = [
+  { file: 'wave', label: 'ごあいさつ', alt: '手を振るにちはらん' },
+  { file: 'telescope', label: '望遠鏡', alt: '望遠鏡をのぞくにちはらん' },
+  { file: 'cheer', label: 'ばんざい', alt: '両手を上げるにちはらん' },
+  { file: 'sleep', label: 'おひるね', alt: 'まくらを抱いて眠るにちはらん' },
+  { file: 'cancelled', label: 'くもり', alt: '雨雲の下で困った顔のにちはらん' },
+  { file: 'wish', label: 'おてがみ', alt: '手紙を持つにちはらん' },
+];
+---
+
+<BaseLayout title="にちはらん" description="日原天文台のキャラクター「にちはらん」の紹介です。">
+  <header class="page-header">
+    <div class="container">
+      <h1>にちはらん</h1>
+      <p>日原天文台のキャラクターです。</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="profile">
+      <img class="profile__img" src="/images/nichiharan/wave.svg" alt="手を振るにちはらん" width="300" height="320">
+      <div class="prose">
+        <h2>どんな子?</h2>
+        <p>ドームのぼうしをかぶった、天文台の子です。ぼうしのスリットが開くと、中から星がのぞきます。</p>
+        <p>昼はおひるね。夜になると、望遠鏡のところでみんなを待っています。</p>
+        <p class="catch">「いっしょに、宇宙をのぞこ!」</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>かたちのひみつ</h2>
+      <ul class="prose">
+        <li>ドームのぼうし … 天文台のドームです。</li>
+        <li>スリットの星 … 夜に開くドームと、そこから見える星空です。</li>
+        <li>紺のケープ … 枕瀬山の夜空の色です。</li>
+        <li>胸の金の星 … みんなが見上げる星です。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>いろいろなにちはらん</h2>
+      <ul class="poses">
+        {
+          poses.map((p) => (
+            <li>
+              <img src={`/images/nichiharan/${p.file}.svg`} alt={p.alt} width="300" height="320" loading="lazy" />
+              <span>{p.label}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .profile {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: var(--space-8);
+    align-items: center;
+    margin-top: var(--space-8);
+  }
+  .profile__img,
+  .poses img {
+    width: 100%;
+    height: auto;
+    background: #fffaf0;
+    border-radius: 24px;
+  }
+  .profile h2 {
+    margin-top: 0;
+  }
+  .catch {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    color: var(--color-accent);
+  }
+  .poses {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 9rem), 1fr));
+    gap: var(--space-4);
+  }
+  .poses li {
+    display: grid;
+    gap: var(--space-2);
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+  @media (max-width: 600px) {
+    .profile {
+      grid-template-columns: 1fr;
+    }
+    .profile__img {
+      max-width: 200px;
+      justify-self: center;
+    }
+  }
+</style>

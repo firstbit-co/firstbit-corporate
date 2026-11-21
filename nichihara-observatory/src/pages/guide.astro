@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { CLOSED, FEES, HOURS, RECEPTION, range, yen } from '../data/facility';
+---
+
+<BaseLayout title="利用案内" description="日原天文台の営業日・開館時間・料金と、来館の流れの案内です。">
+  <header class="page-header">
+    <div class="container">
+      <h1>利用案内</h1>
+      <p>営業日・開館時間・料金と、来館の流れです。</p>
+    </div>
+  </header>
+
+  <div class="container prose">
+    <section id="days">
+      <h2>営業日</h2>
+      <p>{CLOSED.openDaysLabel}に開館しています。毎週{CLOSED.weekdaysLabel}と{CLOSED.extraLabel}は休館です。</p>
+    </section>
+
+    <section id="hours">
+      <h2>開館時間</h2>
+      <div class="table-wrap">
+        <table class="table">
+          <caption class="visually-hidden">開館時間</caption>
+          <tbody>
+            <tr>
+              <th scope="row">昼</th>
+              <td>{range(HOURS.day.start, HOURS.day.end)}<br><span class="muted">建物の中を歩きます。晴れていて太陽が高い時間には、太陽を見ることがあります。</span></td>
+            </tr>
+            <tr>
+              <th scope="row">夜</th>
+              <td>{range(HOURS.night.start, HOURS.night.end)}(夏季は{HOURS.night.summerStart}開始)<br><span class="muted">スタッフが望遠鏡を向け、来館者がのぞきます。どの星が見えるかは、季節と月と雲で変わります。</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>開館時間は変わることがあります。その月の予定は、<a href="/#calendar">トップページのカレンダー</a>で見てください。</p>
+    </section>
+
+    <section id="fees">
+      <h2>料金</h2>
+      <div class="table-wrap">
+        <table class="table table--stack">
+          <caption class="visually-hidden">料金</caption>
+          <thead>
+            <tr><th scope="col">区分</th><th scope="col">大人</th><th scope="col">子ども</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">夜の天体観望</th>
+              <td data-label="大人">{yen(FEES.adult)}</td>
+              <td data-label="子ども">{yen(FEES.nightStudent)}</td>
+            </tr>
+            <tr>
+              <th scope="row">星と森の科学館</th>
+              <td data-label="大人">{yen(FEES.adult)}</td>
+              <td data-label="子ども">{yen(FEES.museumStudent)}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>料金は変わりません。</p>
+    </section>
+
+    <section id="reception">
+      <h2>受付と予約</h2>
+      <p>受付は{RECEPTION.place}（{RECEPTION.placeAlias}）です。科学館の入場券もここで買います。</p>
+      <p>予約は{RECEPTION.reservation}。当日、資料館で受付をします。</p>
+    </section>
+
+    <section id="flow">
+      <h2>来館の流れ</h2>
+      <ol>
+        <li>資料館で受付をする</li>
+        <li>昼は建物を見る</li>
+        <li>夜は望遠鏡をのぞく(天候によってできないことがあります)</li>
+      </ol>
+    </section>
+
+    <section id="notes">
+      <h2>来館のときに</h2>
+      <ul>
+        <li>山の上は、町なかより気温が低くなります。上着を持ってきてください。</li>
+        <li>望遠鏡をのぞくときは、ライトやスマートフォンの画面の明るさに気をつけてください。このサイトの「赤色ナイトモード」も使えます。</li>
+      </ul>
+    </section>
+  </div>
+</BaseLayout>

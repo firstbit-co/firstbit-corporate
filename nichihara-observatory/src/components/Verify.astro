@@ -1,0 +1,36 @@
+---
+/**
+ * 施設側の確認が取れていない情報(Fact.verified === false)を表示するときのラッパー。
+ * 開発サーバーでのみ「要確認」バッジを出し、本番ビルドでは値だけを出す。
+ *
+ * 使い方: <Verify fact={CONTACT.tel} />
+ *         <Verify fact={ACCESS.train} />
+ */
+import type { Fact } from '../data/facility';
+
+interface Props {
+  fact: Fact<unknown>;
+  format?: (value: any) => string;
+}
+
+const { fact, format } = Astro.props;
+const text = format ? format(fact.value) : String(fact.value ?? '');
+const showBadge = import.meta.env.DEV && !fact.verified;
+---
+
+{text}{showBadge && <mark class="verify" title={fact.note ?? '施設に未確認の情報です'}>要確認</mark>}
+
+<style>
+  .verify {
+    margin-left: 0.4em;
+    padding: 0 0.4em;
+    border-radius: 4px;
+    background: var(--color-verify-bg);
+    color: var(--color-verify-text);
+    font-size: 0.75em;
+    font-weight: 700;
+    vertical-align: middle;
+    cursor: help;
+    white-space: nowrap;
+  }
+</style>

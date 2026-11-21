@@ -1,0 +1,134 @@
+---
+/**
+ * 天文台について。原稿:新田さん作成「HP『天文台について』ページ原稿」(2026-10-20)。
+ * 初めての人が1〜2分で「いつできた、どんな望遠鏡の天文台か」をつかめるページ。
+ * 原稿の編集メモ:「日本初」「すばるの試作機」「世界に2台」は使わない。開台は「1985年8月」まで。
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Verify from '../components/Verify.astro';
+import { HISTORY, TELESCOPE } from '../data/facility';
+
+// 原稿で「要確認」の項目は、本番ビルドでは出さない(開発サーバーでは「要確認」付きで見える)
+const history = HISTORY.filter((h) => import.meta.env.DEV || h.text.verified);
+---
+
+<BaseLayout title="天文台について" description="日原天文台は、島根県津和野町の枕瀬山山頂、標高255mにある公開天文台です。1985年の開台以来、口径75cmの反射望遠鏡で、どなたでも星をのぞくことができます。">
+  <header class="page-header">
+    <div class="container">
+      <h1>天文台について</h1>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="about-lead">
+      <div class="prose">
+        <p class="lead">日原(にちはら)天文台は、島根県津和野町の枕瀬山(まくらせやま)山頂、標高255mにある公開天文台です。1985年の開台以来、口径75cmの反射望遠鏡で、どなたでも星をのぞくことができます。この望遠鏡には、のちの「すばる望遠鏡」へ続く、日本の大型望遠鏡開発の歴史が刻まれています。</p>
+      </div>
+      <img class="mascot-spot" src="/images/nichiharan-scope.jpg" alt="にちはらん" width="338" height="314">
+    </section>
+
+    <section id="history" class="prose">
+      <h2>日原天文台の歴史</h2>
+      <p>日原天文台は1985年(昭和60年)8月、当時の日原町が枕瀬山森林公園の山頂に開いた天文台です。ハレー彗星の接近で、全国で星空への関心が高まった年でした。</p>
+      <p>開台当時の75cm望遠鏡は、一般公開されたものとして国内最大級。日本公開天文台協会は、前年の駿台学園(群馬県)と並んで、日原を「60cmを超える大型望遠鏡を持つ公開天文台の幕開け」と位置づけています。</p>
+      <p>その後、天文展示館「ポランの広場」や「星と森の科学館」が加わり、森と星を学べる拠点になりました。2007〜2010年度には、環境省「全国星空継続観察」で4年連続上位3位以内(2009年度は1位)に入り、星空の美しさが記録にも残っています。2025年に開台40周年を迎えました。</p>
+
+      <div class="table-wrap">
+        <table class="table">
+          <caption class="visually-hidden">年表</caption>
+          <thead><tr><th scope="col">年</th><th scope="col">できごと</th></tr></thead>
+          <tbody>
+            {history.map((h) => <tr><th scope="row">{h.year}</th><td><Verify fact={h.text} /></td></tr>)}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="telescope" class="prose">
+      <h2>どんな望遠鏡?</h2>
+      <!-- TODO(写真): ドーム内の75cm望遠鏡全景/接眼部をのぞく様子。すばるや他の鏡の写真を日原の鏡として使わない -->
+      <div class="table-wrap">
+        <table class="table">
+          <caption class="visually-hidden">75cm望遠鏡の仕様</caption>
+          <tbody>
+            {TELESCOPE.specs.map(([k, v]) => <tr><th scope="row">{k}</th><td>{v}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+
+      <h3>① すばる望遠鏡へ続く歴史</h3>
+      <p>1980年代、日本の天文学者たちは世界最大級の望遠鏡(のちの「すばる」)を目指し、巨大な鏡を軽くする研究を進めていました。日原の75cmは、その大型望遠鏡計画の「テストケース」として作られた望遠鏡で、駿台学園と日原の2か所に置かれました。完成したすばるは別の方式の薄い鏡を選びましたが、日原の望遠鏡はそこに至る挑戦の時代を今に伝えています。</p>
+
+      <h3>② 誰でものぞきやすい「ナスミス焦点」</h3>
+      <p>集めた光を鏡で横へ導き、望遠鏡の横からのぞく仕組みです。望遠鏡が空の高いところを向いても低いところを向いても、のぞく高さがほとんど変わらないので、子どもも初めての方も楽に星をのぞけます。上下と水平に動く「経緯台」と組み合わせたこの方式は、すばる望遠鏡も備えています。</p>
+
+      <h3>③ 瞳の約1万倍の光を集める</h3>
+      <p>「75cm」は倍率ではなく、光を集める鏡の直径です。夜空を見上げる人の瞳(直径約7mm)と比べると、約1万倍の面積で光を集めます。その分、肉眼では見えない淡い星雲や星団までとらえられます。倍率は使う接眼レンズで変わり、たとえば焦点距離30mmのレンズなら約300倍です。</p>
+      <!-- TODO(取材): 「約1万倍」「約300倍」は計算値。実際に使う接眼レンズを天文台に確認する -->
+    </section>
+
+    <section id="faq" class="prose">
+      <h2>よくある質問</h2>
+      <h3>Q. すばる望遠鏡の試作機ですか?</h3>
+      <p>望遠鏡全体の試作機ではありません。すばるに至る大型望遠鏡計画の「テストケース」として作られた75cm望遠鏡です。すばるは最終的に別の方式の鏡を選びました。</p>
+      <h3>Q. どんな天体が見られますか?</h3>
+      <p>月のクレーター、木星や土星、二重星、星雲・星団などです。季節や時刻、月明かり、天候で見やすい天体が変わりますので、当日のご案内をご確認ください。</p>
+    </section>
+
+    <section id="more" class="prose">
+      <h2>もっと詳しく</h2>
+      <ul>
+        <!-- TODO: 物語ページ(HPストーリー)ができたらリンクを追加 -->
+        <li><a href="/guide/">観望のご案内(利用案内)</a></li>
+        <li><a href="/facilities/">施設の案内</a></li>
+        <li><a href="/access/">アクセス</a></li>
+        <li><a href="/sorabe/">泊まって星を見る(宙辺 -SORABE-)</a></li>
+      </ul>
+    </section>
+
+    <section id="sources" class="prose sources">
+      <h2>出典</h2>
+      <ul>
+        <li>日本公開天文台協会「公開天文台100年史」p.19、『公開天文台白書2006』p.10</li>
+        <li>国立天文台「日本の主な光学赤外線望遠鏡」</li>
+        <li>津和野町「旧日原町の軌跡」「古川聡JAXA宇宙飛行士講演会」『広報つわの』2024年12月号</li>
+        <li>ディスカバリーパーク焼津「望遠鏡づくりの名人 法月惣次郎」</li>
+        <li>環境省「全国星空継続観察」結果 2007・2008・2009・2010年度</li>
+        <li>しまね観光ナビ「日原天文台」</li>
+      </ul>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .about-lead {
+    display: grid;
+    grid-template-columns: minmax(0, 44rem) 1fr;
+    gap: var(--space-8);
+    align-items: center;
+    margin-top: var(--space-8);
+  }
+  .about-lead .mascot-spot {
+    margin: 0;
+    justify-self: center;
+  }
+  .lead {
+    font-size: 1.1rem;
+    line-height: 2;
+  }
+  h3 {
+    margin-top: var(--space-8);
+  }
+  .sources {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+  @media (max-width: 860px) {
+    .about-lead {
+      grid-template-columns: 1fr;
+    }
+    .about-lead .mascot-spot {
+      justify-self: end;
+    }
+  }
+</style>
